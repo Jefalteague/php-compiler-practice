@@ -1,4 +1,6 @@
 <?php
+
+// a test of updates
 // global constants
 
 //define("EOF", "EOF"); // END OF FILE;
