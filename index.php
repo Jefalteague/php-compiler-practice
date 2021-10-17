@@ -5,16 +5,157 @@
 **
 */
 
-include('Factory/Scanner_Factory.php');
+include('Factory/Parser_Factory.php');
 
 $config = include('Config.php');
 
-use Factory\Scanner_Factory as Scanner_Factory;
+use Factory\Parser_Factory as Parser_Factory;
 
-$scanner = new Scanner_Factory();
+$parser_factory = new Parser_Factory();
 
-$scanner = $scanner->create_scanner('my_language', 'bob.txt', $config);
+$parser = $parser_factory->create_parser('my_language', 'jeffrey.txt', $config);
 
-$token = $scanner->make_token();
+$token = $parser->make_token();
 
+echo "<br />Token Message:";
 echo $token->get_message();
+echo "<br />";
+
+echo "<br /> Token Value:";
+echo $token->get_value();
+echo "<br />";
+
+echo "<br />Token Column Number:";
+echo $token->get_column_number();
+echo "<br />";
+
+echo "<br />Token Line Number:";
+echo $token->get_line_number();
+echo "<br />";
+
+$token = $parser->make_token();
+
+echo "<br />Token Message:";
+echo $token->get_message();
+echo "<br />";
+
+echo "<br /> Token Value:";
+echo $token->get_value();
+echo "<br />";
+
+echo "<br />Token Column Number:";
+echo $token->get_column_number();
+echo "<br />";
+
+echo "<br />Token Line Number:";
+echo $token->get_line_number();
+echo "<br />";
+
+$token = $parser->make_token();
+
+echo "<br />Token Message:";
+echo $token->get_message();
+echo "<br />";
+
+echo "<br /> Token Value:";
+echo $token->get_value();
+echo "<br />";
+
+echo "<br />Token Column Number:";
+echo $token->get_column_number();
+echo "<br />";
+
+echo "<br />Token Line Number:";
+echo $token->get_line_number();
+echo "<br />";
+
+$token = $parser->make_token();
+
+echo "<br />Token Message:";
+echo $token->get_message();
+echo "<br />";
+
+echo "<br /> Token Value:";
+echo $token->get_value();
+echo "<br />";
+
+echo "<br />Token Column Number:";
+echo $token->get_column_number();
+echo "<br />";
+
+echo "<br />Token Line Number:";
+echo $token->get_line_number();
+echo "<br />";
+
+$token = $parser->make_token();
+
+echo "<br />Token Message:";
+echo $token->get_message();
+echo "<br />";
+
+echo "<br /> Token Value:";
+echo $token->get_value();
+echo "<br />";
+
+echo "<br />Token Column Number:";
+echo $token->get_column_number();
+echo "<br />";
+
+echo "<br />Token Line Number:";
+echo $token->get_line_number();
+echo "<br />";
+
+$token = $parser->make_token();
+
+echo "<br />Token Message:";
+echo $token->get_message();
+echo "<br />";
+
+echo "<br /> Token Value:";
+echo $token->get_value();
+echo "<br />";
+
+echo "<br />Token Column Number:";
+echo $token->get_column_number();
+echo "<br />";
+
+echo "<br />Token Line Number:";
+echo $token->get_line_number();
+echo "<br />";
+
+$token = $parser->make_token();
+
+echo "<br />Token Message:";
+echo $token->get_message();
+echo "<br />";
+
+echo "<br /> Token Value:";
+echo $token->get_value();
+echo "<br />";
+
+echo "<br />Token Column Number:";
+echo $token->get_column_number();
+echo "<br />";
+
+echo "<br />Token Line Number:";
+echo $token->get_line_number();
+echo "<br />";
+
+$token = $parser->make_token();
+
+echo "<br />Token Message:";
+echo $token->get_message();
+echo "<br />";
+
+echo "<br /> Token Value:";
+echo $token->get_value();
+echo "<br />";
+
+echo "<br />Token Column Number:";
+echo $token->get_column_number();
+echo "<br />";
+
+echo "<br />Token Line Number:";
+echo $token->get_line_number();
+echo "<br />";
+

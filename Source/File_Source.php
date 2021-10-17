@@ -15,8 +15,6 @@ class File_Source extends Source {
 	
 	/* properties */
 	
-	protected $source;
-	
 	protected $f_open;
 	
 	protected $current_char;
@@ -50,22 +48,15 @@ class File_Source extends Source {
 		}
 		
 	}
-	
-	// return the source string
-	public function get_source() {
-		
-		return $this->source;
-		
-	}
-	
+
 	public function get_resource() {
 		
 		return $this->f_open;
 		
 	}
 	
-	// look at the current line number
-	public function get_line_number() {
+
+	public function get_line_number() { // look at the current line number
 		
 		return $this->line_number;
 		
@@ -100,6 +91,7 @@ class File_Source extends Source {
 	// update the current_char depending on certain contexts
 	// much of this based on the book, i might try to figure out
 	// a personalized approach later, for now, just practice
+
 	public function select_char() {
 
 		// first time in
@@ -126,10 +118,10 @@ class File_Source extends Source {
 			
 		// EOL		
 		} else if(($this->current_pos == -1) || ($this->current_pos == strlen($this->line))) {
-
-			$this->current_pos = $this->current_pos + 1;
 			
-			return $config['EOL'];
+			$this->current_pos = $this->current_pos + 1;
+	
+			return $this->config['EOL'];
 			
 		// read new line
 		} else if($this->current_pos > strlen($this->line)) {
@@ -143,8 +135,8 @@ class File_Source extends Source {
 
 			$this->current_char = $this->line[$this->current_pos];
 
-			$this->current_pos = $this->current_pos + 1;
-	
+			$this->current_pos = $this->current_pos + 1; //
+
 			return $this->current_char;
 			
 		}
@@ -164,5 +156,11 @@ class File_Source extends Source {
 		return $this->current_char;
 		
 	}
+	
+	public function get_column_number() {
+		
+		return $this->current_pos;
+		
+	} 
 	
 }

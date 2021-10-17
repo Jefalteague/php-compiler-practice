@@ -13,6 +13,10 @@ require_once('Token/Token.php');
 
 class EOF_Token extends Token{
 	
+	// properties
+		
 	public $type = "EOF";
+		
+	// methods
 	
 }

@@ -10,8 +10,6 @@ class String_source extends Source {
 	
 	/* properties*/
 	
-	protected $source;
-	
 	protected $f_open;
 	
 	protected $current_char;
@@ -39,13 +37,7 @@ class String_source extends Source {
 		}
 		
 	}
-	
-	public function get_source() {
-		
-		return $this->source;
-		
-	}
-	
+
 	public function make_line() {
 		
 		if ($this->line_number <= count($this->f_open) - 1) {

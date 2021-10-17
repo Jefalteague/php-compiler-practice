@@ -9,9 +9,19 @@ namespace Source;
 
 abstract class Source {
 	
-	/* abstract methods*/
+	// properties
 	
-	abstract public function get_source();
+	protected $source;
+	
+	// methods
+	
+	public function get_source() { // return the source name string passed in
+		
+		return $this->source;
+		
+	}
+	
+	// abstract public function get_source();
 	
 	abstract public function make_line();
 

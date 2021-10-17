@@ -1,7 +1,7 @@
 <?php
 
 /*
-** The general token for using right now.
+** The Char Token class
 **
 */
 
@@ -11,12 +11,14 @@ use Token\Token as Token;
 
 require_once('Token/Token.php');
 
-class Gen_Token extends Token {
-	
+class Char_Token extends Token {
+
 	// properties
 	
-	public $type = "GEN";
-		
+	public $type = "CHAR";
+	public $value;
+	
 	// methods
 	
+
 }
