@@ -93,53 +93,55 @@ class File_Source extends Source {
 	// a personalized approach later, for now, just practice
 
 	public function select_char() {
-
-		// first time in
-		if($this->current_pos == -2) {
-
-			$this->make_line();
-
-			return $this->make_char();
-
-		// EOF	
-		} else if($this->line == FALSE){
-
-			if(feof($this->f_open)) {
+		
+		if ($this->f_open) {
 				
-				fclose($this->f_open);
+			if($this->current_pos == -2) { // first time in
+
+				$this->make_line();
+
+				return $this->make_char();
+
+			} else if($this->line == FALSE){ // EOF	
+
+				if(feof($this->f_open)) { // this creates a problem with the while loop in the parser
+					
+					fclose($this->f_open);
 				
+				} else {
+					
+					echo 'help';
+					
+				}
+
+				return $this->config['EOF'];
+				
+			// EOL		
+			} else if(($this->current_pos == -1) || ($this->current_pos == strlen($this->line))) {
+				
+				$this->current_pos = $this->current_pos + 1;
+		
+				return $this->config['EOL'];
+				
+			// read new line
+			} else if($this->current_pos > strlen($this->line)) {
+
+				$this->make_line();
+
+				return $this->make_char();
+			
+			// return char at current position
 			} else {
-				
-				echo "gonna have to fix this";
+
+				$this->current_char = $this->line[$this->current_pos];
+
+				$this->current_pos = $this->current_pos + 1; //
+
+				return $this->current_char;
 				
 			}
 			
-			return $this->config['EOF'];
-			
-		// EOL		
-		} else if(($this->current_pos == -1) || ($this->current_pos == strlen($this->line))) {
-			
-			$this->current_pos = $this->current_pos + 1;
-	
-			return $this->config['EOL'];
-			
-		// read new line
-		} else if($this->current_pos > strlen($this->line)) {
-
-			$this->make_line();
-
-			return $this->make_char();
-		
-		// return char at current position
-		} else {
-
-			$this->current_char = $this->line[$this->current_pos];
-
-			$this->current_pos = $this->current_pos + 1; //
-
-			return $this->current_char;
-			
-		}
+		} else {echo 'help';}
 		
 	}
 	

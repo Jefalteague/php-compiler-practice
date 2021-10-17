@@ -31,5 +31,5 @@ abstract class Parser {
 	
 	abstract public function get_symb_tab();
 	
-	abstract public function make_token();
+	abstract public function parse();
 }
