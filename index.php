@@ -17,4 +17,3 @@ $parser_factory = new Parser_Factory();
 $parser = $parser_factory->create_parser('my_language', 'jeffrey.txt', $config);
 
 $token = $parser->parse();
-
