@@ -5,6 +5,8 @@
 ** To be used with compiler local dev
 */
 
+namespace Autoloader;
+
 class Autoloader {
 
 	public static $dirs = array();
