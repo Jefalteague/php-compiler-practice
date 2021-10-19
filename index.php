@@ -1,19 +1,18 @@
 <?php
 
-/*
-** The index to test the folder/namespace changes
-**
-*/
+require_once('.\Autoloader\Autoloader.php');
 
-include('Factory/Parser_Factory.php');
+$config = require_once('Config.php');
 
-$config = include('Config.php');
+$auto_dirs = $config['auto_dirs']['auto_dirs'];
+
+autoloader::init($auto_dirs);
 
 use Factory\Parser_Factory as Parser_Factory;
 
 $parser_factory = new Parser_Factory();
 
-$parser = $parser_factory->create_parser('my_language', 'bob.txt', $config);
+$parser = $parser_factory->create_parser('my_language', 'jeffrey.txt', $config);
 
 $token = $parser->parse();
 

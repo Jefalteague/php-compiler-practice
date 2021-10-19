@@ -12,11 +12,6 @@ use Scanner\My_Language_Scanner as My_Language_Scanner;
 use Source\File_Source as File_Source;
 use Source\String_Source as String_Source;
 
-require_once('Parser/My_Language_Parser.php');
-require_once('Scanner/My_Language_Scanner.php');
-require_once('Source/File_Source.php');
-require_once('Source/String_Source.php');
-
 class Parser_Factory {
 	
 	/* methods */

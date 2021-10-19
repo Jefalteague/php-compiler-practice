@@ -11,9 +11,9 @@ use Parser\Parser as Parser;
 use Scanner\My_Language_Scanner as My_Language_Scanner;
 use Token\EOF_Token as EOF_Token;
 
-require_once('Parser/Parser.php');
-require_once('Scanner/My_Language_Scanner.php');
-require_once('Token/EOF_Token.php');
+//require_once('Parser/Parser.php');
+//require_once('Scanner/My_Language_Scanner.php');
+//require_once('Token/EOF_Token.php');
 
 class My_Language_Parser extends Parser {
 	

@@ -114,14 +114,14 @@ class File_Source extends Source {
 					
 				}
 
-				return $this->config['EOF'];
+				return $this->config['tokens']['EOF'];
 				
 			// EOL		
 			} else if(($this->current_pos == -1) || ($this->current_pos == strlen($this->line))) {
 				
 				$this->current_pos = $this->current_pos + 1;
 		
-				return $this->config['EOL'];
+				return $this->config['tokens']['EOL'];
 				
 			// read new line
 			} else if($this->current_pos > strlen($this->line)) {

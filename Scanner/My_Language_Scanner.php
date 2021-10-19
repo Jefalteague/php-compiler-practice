@@ -82,7 +82,7 @@ class My_Language_Scanner extends Scanner{
 
 		$this->current_char = $this->select_char();
 
-		if ($this->current_char == $this->source->config['EOF']) {
+		if ($this->current_char == $this->source->config['tokens']['EOF']) {
 			
 			$source= $this->source;
 			$value = $this->current_char;
