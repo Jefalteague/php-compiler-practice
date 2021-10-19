@@ -2,11 +2,13 @@
 
 require_once('.\Autoloader\Autoloader.php');
 
+use Autoloader\Autoloader as Autoloader;
+
 $config = require_once('Config.php');
 
 $auto_dirs = $config['auto_dirs']['auto_dirs'];
 
-autoloader::init($auto_dirs);
+Autoloader::init($auto_dirs);
 
 use Factory\Parser_Factory as Parser_Factory;
 
