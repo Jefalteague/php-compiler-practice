@@ -41,13 +41,7 @@ class My_Language_Parser extends Parser {
 		$this->message_handler->send_message();
 		
 	}
-	
-	public function notify_listeners() {
-		
-		
-		
-	}
-	
+
 	public function parse() {
 			
 		$token_array = array();

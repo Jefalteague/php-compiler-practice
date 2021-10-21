@@ -22,9 +22,9 @@ $parser_factory = new Parser_Factory();
 
 $parser_listener = new Parser_Listener();
 
-//var_dump($parser_listener);
 
-$parser = $parser_factory->create_parser('my_language', 'jeffrey.txt', $config);
+
+$parser = $parser_factory->create_parser('my_language', 'white_space_work.txt', $config);
 
 $parser->add_listener($parser_listener);
 

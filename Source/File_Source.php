@@ -9,8 +9,6 @@ namespace Source;
 
 use Source\Source as Source;
 
-include('Source/Source.php');
-
 class File_Source extends Source {
 	
 	/* properties */
@@ -67,10 +65,12 @@ class File_Source extends Source {
 		
 	public function make_line() {
 	
-	
-		
 		$this->line = fgets($this->f_open);
-		$this->line = rtrim($this->line, "\n\r");
+		
+		// problem: if i do right trim, i can't read following lines
+		// problem: if i dont right trim, i get extra white spaces at end of line
+		// problem: if i use white space function, i don't get EOL token returned
+		//$this->line = rtrim($this->line, "\n\r"); //have to move this somewhere else?
 
 		$this->current_pos = -1;
 
@@ -91,6 +91,19 @@ class File_Source extends Source {
 		}
 		
 		return $this->line;
+		
+	}
+	
+	public function skip_white_space() {
+		
+		//$this->current_pos = $this->current_pos ++;
+		$this->select_char();
+		
+	}
+	
+	public function skip_comment() {
+		
+		
 		
 	}
 
@@ -120,7 +133,9 @@ class File_Source extends Source {
 				
 			// EOL		
 			} else if(($this->current_pos == -1) || ($this->current_pos == strlen($this->line))) {
+				//echo strlen($this->line);
 				
+				// does this fix it?
 				$this->current_pos = $this->current_pos + 1;
 		
 				return $this->config['tokens']['EOL'];
@@ -131,14 +146,31 @@ class File_Source extends Source {
 				$this->make_line();
 
 				return $this->make_char();
-			
+
 			// return char at current position
 			} else {
 
 				$this->current_char = $this->line[$this->current_pos];
-
+				
+				//echo $this->current_char;
+				
 				$this->current_pos = $this->current_pos + 1; //
-
+				
+				
+				// skip white spaces
+				if (ctype_space($this->current_char)) {
+					
+					while(ctype_space($this->current_char)) {
+						
+						$this->skip_white_space();
+					
+					}
+					
+					//while ($this->current_char = '{') {}
+					
+					
+				}
+				
 				return $this->current_char;
 				
 			}

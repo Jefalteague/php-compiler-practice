@@ -2,8 +2,6 @@
 
 namespace Message;
 
-use Token;
-
 class Parser_Listener {
 	
 	// properties
@@ -12,12 +10,7 @@ class Parser_Listener {
 	public $token_array;
 	
 	// methods
-	
-	public function __construct() {
-		
-		
-	}
-	
+
 	public function message_got($message, $token_array) {
 		
 		echo "<br />";

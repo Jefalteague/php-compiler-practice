@@ -10,12 +10,8 @@ use Scanner\Scanner as Scanner;
 use Source\Source as Source;
 use Token\Gen_Token as Gen_Token;
 use Token\EOF_Token as EOF_Token;
+use Token\EOL_Token as EOL_Token;
 use Token\Char_Token as Char_Token;
-
-include('Scanner/Scanner.php');
-include('Token/Gen_Token.php');
-include('Token/EOF_Token.php');
-require_once('Token/Char_Token.php');
 
 class My_Language_Scanner extends Scanner{
 
@@ -89,12 +85,19 @@ class My_Language_Scanner extends Scanner{
 			
 			return new EOF_Token($message = 'This is a EOF token.', $value, $source);
 
+		} else if($this->current_char == $this->source->config['tokens']['EOL']) {
+			
+			$source= $this->source;
+			$value = $this->current_char;
+			
+			return new EOL_Token($message = 'This is a EOL token.', $value, $source);
+			
 		} else if(ctype_alpha($this->current_char)) {
 			
 			$source= $this->source;
 			$value = $this->current_char;
 			
-			return new Char_Token($message = 'This is a character token.', $value, $source);
+			return new Char_Token($message = 'This is a CHAR token.', $value, $source);
 
 		} else {
 			

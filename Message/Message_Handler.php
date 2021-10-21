@@ -12,12 +12,6 @@ class Message_Handler {
 	
 	// methods 
 	
-	public function __construct() {
-		
-		
-		
-	}
-	
 	public function add_listener($listener) {
 		//var_dump($listener);
 		$this->listeners[] = $listener;
