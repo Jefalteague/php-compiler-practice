@@ -1,2 +1,9 @@
-Hello.
-there.
+Hello there. I think that I have solved two recent issues.
+The first was the FATAL ERROR for the feof, etc. functions.
+The second was the extra tokens created at the EOLs.
+The first was solved by reworking the while loop,
+creating a token var outside of the loop, etc. Look at the code.
+The second was solved by using rtrim() and removing \n\r because
+fgets includes \n\r. The next task is to continue to work on the
+message system. I want to loop through an array of tokens, printing
+all important information.

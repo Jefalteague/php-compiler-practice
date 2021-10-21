@@ -20,7 +20,7 @@ use Message\Parser_Listener as Parser_Listener;
 
 $parser_factory = new Parser_Factory();
 
-$parser_listener = new Parser_Listener($message = 'hello');
+$parser_listener = new Parser_Listener();
 
 //var_dump($parser_listener);
 

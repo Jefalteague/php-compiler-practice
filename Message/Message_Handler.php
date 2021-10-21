@@ -31,17 +31,17 @@ class Message_Handler {
 		
 	}
 	
-	public function send_message() {
+	public function send_message($message, $token_array = NULL) {
 		
-		$this->notify_listeners();
+		$this->notify_listeners($message, $token_array);
 		
 	}
 	
-	public function notify_listeners() {
+	public function notify_listeners($message, $token_array) {
 		
 		foreach($this->listeners as $listener) {
 			//var_dump($this->listeners);
-			return $listener->message_got();
+			return $listener->message_got($message, $token_array);
 			
 		}
 		

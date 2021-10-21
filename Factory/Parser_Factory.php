@@ -23,13 +23,13 @@ class Parser_Factory {
 			
 			if (is_file($source) && file_exists($source)) {
 				
-				echo "this creates a file parser and scanner for My_Language<br />";
+				//echo "this creates a file parser and scanner for My_Language<br />";
 				
 				$source = new File_Source($source, $config);
 				
-				$scanner = new My_Language_Scanner($source);
+				$scanner = new My_Language_Scanner($source, $config);
 				
-				return new My_Language_Parser($scanner);
+				return new My_Language_Parser($scanner, $config);
 
 			} else if(is_string($source)) { //more to do here, currently only supporting files due to recent changes/improvements
 				
@@ -37,9 +37,9 @@ class Parser_Factory {
 			
 				$source = new String_Source($source, $config);
 				
-				$scanner = new My_Language_Scanner($source);
+				$scanner = new My_Language_Scanner($source, $config);
 				
-				return new My_Language_Parser($scanner);
+				return new My_Language_Parser($scanner, $config);
 				
 			} else {
 			

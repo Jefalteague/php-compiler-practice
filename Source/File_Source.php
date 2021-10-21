@@ -66,8 +66,11 @@ class File_Source extends Source {
 	}
 		
 	public function make_line() {
+	
+	
 		
 		$this->line = fgets($this->f_open);
+		$this->line = rtrim($this->line, "\n\r");
 
 		$this->current_pos = -1;
 

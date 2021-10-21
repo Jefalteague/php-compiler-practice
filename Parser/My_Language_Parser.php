@@ -16,11 +16,13 @@ class My_Language_Parser extends Parser {
 	
 	public $scanner;
 	public $message_handler;
+	public $config;
 	
-	public function __construct(My_Language_Scanner $scanner) {
+	public function __construct(My_Language_Scanner $scanner, $config) {
 		
 		$this->scanner = $scanner;
 		$this->message_handler = new Message_Handler();
+		$this->config = $config;
 
 	}
 	
@@ -47,38 +49,31 @@ class My_Language_Parser extends Parser {
 	}
 	
 	public function parse() {
-		//while (!feof($this->scanner->source->f_open)) {
-		while (!(is_a($token = $this->scanner->make_token(), 'EOF_Token'))) {
+			
+		$token_array = array();
 		
-			//
+		$token = NULL;
+		
+		while (!(is_a($token, 'Token\EOF_Token'))) {
+	
+			$token = $this->scanner->make_token();
 			
-			echo "<br />Token Message: ";
-			echo $token->get_message();
-			echo "<br />";
-			
-			echo "<br /> Token Value: ";
-			echo "<b>";
-			echo $token->get_value();
-			echo "</b>";
-			echo "<br />";
-
-			echo "<br />Token Column Number: ";
-			echo $token->get_column_number();
-			echo "<br />";
-
-			echo "<br />Token Line Number: ";
-			echo $token->get_line_number();
-			echo "<br />";
-			
-			echo "<hr>";
+			$token_array[] = $token;
 			
 		}
 		
+		// create verbose config to turn on and off message sending
 		
-		
+		if($this->config['messaging'] == TRUE) {
+			
+			$this->message_handler->send_message($message = 'VOICY MODE', $token_array = $token_array);
+			
+		} else {
+			
+			$this->message_handler->send_message($message = "QUIET MODE");
+			
+		}
 
-				
-		
 	}
 	
 }
