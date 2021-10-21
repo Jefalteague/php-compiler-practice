@@ -19,7 +19,7 @@ require_once('Token/Char_Token.php');
 
 class My_Language_Scanner extends Scanner{
 
-	protected $source;
+	public $source;
 	protected $current_char;
 	protected $line;
 	private $token;

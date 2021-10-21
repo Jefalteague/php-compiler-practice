@@ -14,8 +14,8 @@ include('Source/Source.php');
 class File_Source extends Source {
 	
 	/* properties */
-	
-	protected $f_open;
+		
+	public $f_open;
 	
 	protected $current_char;
 	
@@ -27,6 +27,8 @@ class File_Source extends Source {
 	
 	public $config;
 	
+	protected $file;
+	
 	/* methods */
 	
 	public function __construct($file, $config) {
@@ -34,6 +36,7 @@ class File_Source extends Source {
 		$this->current_pos = -2;
 		$this->line_number = 0;
 		$this->config = $config;
+		$this->file = $file;
 
 		if(file_exists($file)) {
 					
@@ -104,16 +107,12 @@ class File_Source extends Source {
 
 			} else if($this->line == FALSE){ // EOF	
 
-				if(feof($this->f_open)) { // this creates a problem with the while loop in the parser
+				if (feof($this->f_open)){
 					
 					fclose($this->f_open);
-				
-				} else {
-					
-					echo 'help';
 					
 				}
-
+				
 				return $this->config['tokens']['EOF'];
 				
 			// EOL		

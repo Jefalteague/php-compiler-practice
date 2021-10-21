@@ -21,7 +21,7 @@ class Parser_Factory {
 		
 		if($language == 'my_language') {
 			
-			if (is_file($source)) {
+			if (is_file($source) && file_exists($source)) {
 				
 				echo "this creates a file parser and scanner for My_Language<br />";
 				
@@ -31,7 +31,7 @@ class Parser_Factory {
 				
 				return new My_Language_Parser($scanner);
 
-			} else if(is_string($source)) {
+			} else if(is_string($source)) { //more to do here, currently only supporting files due to recent changes/improvements
 				
 				echo "this creates a string parser and scanner for My_Language<br />";
 			
