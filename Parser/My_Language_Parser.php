@@ -51,6 +51,10 @@ class My_Language_Parser extends Parser {
 		while (!(is_a($token, 'Token\EOF_Token'))) {
 	
 			$token = $this->scanner->make_token();
+			//var_dump($token);
+			//die;
+			//$bob = is_a($token, 'Token\Gen_Token');
+			//var_dump($bob);
 			
 			$token_array[] = $token;
 			

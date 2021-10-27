@@ -42,10 +42,6 @@ class File_Source extends Source {
 		
 			$this->f_open = fopen($file, 'r');
 			
-		} else {
-			
-			echo "hell no";
-			
 		}
 		
 	}
@@ -67,10 +63,7 @@ class File_Source extends Source {
 	
 		$this->line = fgets($this->f_open);
 		
-		// problem: if i do right trim, i can't read following lines
-		// problem: if i dont right trim, i get extra white spaces at end of line
-		// problem: if i use white space function, i don't get EOL token returned
-		//$this->line = rtrim($this->line, "\n\r"); //have to move this somewhere else?
+		$this->line = rtrim($this->line, "\n\r");
 
 		$this->current_pos = -1;
 
@@ -93,19 +86,6 @@ class File_Source extends Source {
 		return $this->line;
 		
 	}
-	
-	public function skip_white_space() {
-		
-		//$this->current_pos = $this->current_pos ++;
-		$this->select_char();
-		
-	}
-	
-	public function skip_comment() {
-		
-		
-		
-	}
 
 	// update the current_char depending on certain contexts
 	// much of this based on the book, i might try to figure out
@@ -113,75 +93,56 @@ class File_Source extends Source {
 
 	public function select_char() {
 		
-		if ($this->f_open) {
+		if($this->current_pos == -2) { // first time in
+
+			$this->make_line();
+			
+				$this->current_pos = $this->current_pos + 1;
+
+			return $this->make_char();
+
+		} else if($this->line == FALSE) { // EOF	
+
+			if(is_resource($this->f_open)) {
 				
-			if($this->current_pos == -2) { // first time in
-
-				$this->make_line();
-
-				return $this->make_char();
-
-			} else if($this->line == FALSE){ // EOF	
-
 				if (feof($this->f_open)){
 					
 					fclose($this->f_open);
 					
 				}
 				
-				return $this->config['tokens']['EOF'];
-				
-			// EOL		
-			} else if(($this->current_pos == -1) || ($this->current_pos == strlen($this->line))) {
-				//echo strlen($this->line);
-				
-				// does this fix it?
-				$this->current_pos = $this->current_pos + 1;
-		
-				return $this->config['tokens']['EOL'];
-				
-			// read new line
-			} else if($this->current_pos > strlen($this->line)) {
-
-				$this->make_line();
-
-				return $this->make_char();
-
-			// return char at current position
-			} else {
-
-				$this->current_char = $this->line[$this->current_pos];
-				
-				//echo $this->current_char;
-				
-				$this->current_pos = $this->current_pos + 1; //
-				
-				
-				// skip white spaces
-				if (ctype_space($this->current_char)) {
-					
-					while(ctype_space($this->current_char)) {
-						
-						$this->skip_white_space();
-					
-					}
-					
-					//while ($this->current_char = '{') {}
-					
-					
-				}
-				
-				return $this->current_char;
-				
 			}
+
+			return $this->config['tokens']['EOF'];
 			
-		} else {echo 'help';}
+		// EOL		
+		} else if(($this->current_pos == -1) || ($this->current_pos == strlen($this->line))) {
+
+			$this->current_pos = $this->current_pos + 1;
+			
+			return $this->config['tokens']['EOL'];
+			
+		// read new line
+		} else if($this->current_pos > strlen($this->line)) {
+
+			$this->make_line();
+
+			return $this->make_char();
+
+		// return char at current position
+		} else {
+
+			$this->current_char = $this->line[$this->current_pos];
+			
+			$this->current_pos = $this->current_pos + 1;
+				
+			return $this->current_char;
+	
+		}
 		
 	}
 	
 	public function make_char() {
-		
-		++ $this->current_pos;
 
 		return $this->select_char();
 		

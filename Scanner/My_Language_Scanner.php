@@ -47,9 +47,7 @@ class My_Language_Scanner extends Scanner{
 	// helper function make a char using source class
 	public function select_char() {
 
-		$this->current_char = $this->source->select_char();
-		
-		return $this->current_char;
+		return $this->source->select_char();
 		
 	}
 	
@@ -73,10 +71,73 @@ class My_Language_Scanner extends Scanner{
 		return $this->source->get_line_number();
 		
 	}
+	
+	public function make_char() {
+		
+		return $this->source->make_char();
+		
+	}
+	
+	public function vardump ($object) {
+		
+		echo "<br />Var Dump: ";
+		var_dump($object);
+		echo "<br />";
+		
+	}
 
-	public function make_token() {
-
+	public function skip_white_space() {
+		
 		$this->current_char = $this->select_char();
+
+		while((ctype_space($this->current_char)) || ($this->current_char == "{")) {
+
+			if($this->current_char == "{") {
+				
+				while(($this->current_char != "}") && ($this->current_char != $this->source->config['tokens']['EOL'])) {
+					
+					$this->current_char = $this->make_char();
+
+				}
+				
+				if($this->current_char == "}") {
+
+					$this->current_char = $this->make_char();
+
+				}
+				
+			} else if(ctype_space($this->current_char)) {
+				
+				$this->current_char = $this->make_char();
+				
+			}
+		}
+		
+	}
+	
+	public function identifier() {
+		
+		$value = '';
+
+		while(ctype_alpha($this->current_char) && ($this->current_char != $this->source->config['tokens']['EOL'])) {
+			
+			$value = $value . $this->current_char;
+			
+			$this->current_char = $this->make_char();
+			
+			echo $this->current_char;
+			
+		}
+		
+		return $value;
+		
+	}
+	
+	public function make_token() {
+		
+		$this->skip_white_space();
+		
+		// the textbook contains the following, but i don't understand why: $this->current_char = $this->select_char();
 
 		if ($this->current_char == $this->source->config['tokens']['EOF']) {
 			
@@ -93,12 +154,20 @@ class My_Language_Scanner extends Scanner{
 			return new EOL_Token($message = 'This is a EOL token.', $value, $source);
 			
 		} else if(ctype_alpha($this->current_char)) {
-			
-			$source= $this->source;
-			$value = $this->current_char;
+
+			$source = $this->source;
+			$value = $this->identifier();
 			
 			return new Char_Token($message = 'This is a CHAR token.', $value, $source);
 
+		} else if($this->current_char = '.') {
+			
+			$message = 'This is a period stuck in a loop';
+			$value = $this->current_char;
+			$source = $this->source;
+			
+			return new Gen_Token($message, $value, $source);
+			
 		} else {
 			
 			$source= $this->source;

@@ -4,7 +4,7 @@ return [
 	
 	'language' => 'My_Language',
 	
-	'parser' => 'My_Langguage_Parser',
+	'parser' => 'My_Language_Parser',
 	
 	'scanner' => 'My_Language_Scanner',
 	
