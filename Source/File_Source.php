@@ -21,7 +21,7 @@ class File_Source extends Source {
 	
 	public $line;
 	
-	protected $line_number;
+	public $line_number;
 	
 	public $config;
 	

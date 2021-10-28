@@ -101,9 +101,15 @@ class My_Language_Scanner extends Scanner{
 				}
 				
 				if($this->current_char == "}") {
-
+					//echo $this->current_char;
 					$this->current_char = $this->make_char();
 
+				} else {
+					
+					echo "ERROR"; 
+					
+					die;
+					
 				}
 				
 			} else if(ctype_space($this->current_char)) {
@@ -115,8 +121,15 @@ class My_Language_Scanner extends Scanner{
 		
 	}
 	
+	/*
+	** Helper function to use after using identifier(), which uses make_char() and leaves the current_char and current_pos set
+	** which is then overwritten by select_char() when called by next round of parser. set_back prevents the overwrite by setting
+	** current_pos and current_char one back. kind of hacky...might break soon.
+	*/
+	
 	public function set_back() {
 	
+		// these need to be accessible through local helper functions
 		$this->source->current_pos = $this->source->current_pos - 1;
 
 		$this->source->current_char = $this->source->line[$this->source->current_pos -1];
@@ -124,6 +137,11 @@ class My_Language_Scanner extends Scanner{
 		$this->current_char = $this->source->current_char;
 		
 	}
+	
+	/*
+	** Method to use in the make_token() method. Creates the ID and Reserved Words Tokens.
+	** @ return string
+	*/
 	
 	public function identifier() {
 		
@@ -142,6 +160,11 @@ class My_Language_Scanner extends Scanner{
 		return $value;
 		
 	}
+	
+	/*
+	** Method to create the various Tokens to return to the Parser.
+	** @return object
+	*/
 	
 	public function make_token() {
 		
