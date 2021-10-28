@@ -115,6 +115,16 @@ class My_Language_Scanner extends Scanner{
 		
 	}
 	
+	public function set_back() {
+	
+		$this->source->current_pos = $this->source->current_pos - 1;
+
+		$this->source->current_char = $this->source->line[$this->source->current_pos -1];
+
+		$this->current_char = $this->source->current_char;
+		
+	}
+	
 	public function identifier() {
 		
 		$value = '';
@@ -124,10 +134,10 @@ class My_Language_Scanner extends Scanner{
 			$value = $value . $this->current_char;
 			
 			$this->current_char = $this->make_char();
-			
-			echo $this->current_char;
-			
+
 		}
+		
+		$this->set_back();
 		
 		return $value;
 		
@@ -160,7 +170,7 @@ class My_Language_Scanner extends Scanner{
 			
 			return new Char_Token($message = 'This is a CHAR token.', $value, $source);
 
-		} else if($this->current_char = '.') {
+		} else if($this->current_char == '.') {
 			
 			$message = 'This is a period stuck in a loop';
 			$value = $this->current_char;

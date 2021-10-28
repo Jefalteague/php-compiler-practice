@@ -15,11 +15,11 @@ class File_Source extends Source {
 		
 	public $f_open;
 	
-	protected $current_char;
+	public $current_char;
 	
-	protected $current_pos;
+	public $current_pos;
 	
-	protected $line;
+	public $line;
 	
 	protected $line_number;
 	
@@ -63,7 +63,9 @@ class File_Source extends Source {
 	
 		$this->line = fgets($this->f_open);
 		
-		$this->line = rtrim($this->line, "\n\r");
+		// NOTE: including the following prevents the parser from reading the next line
+		// of code after a blank line
+		// $this->line = rtrim($this->line, "\n\r");
 
 		$this->current_pos = -1;
 
@@ -97,7 +99,7 @@ class File_Source extends Source {
 
 			$this->make_line();
 			
-				$this->current_pos = $this->current_pos + 1;
+			$this->current_pos = $this->current_pos + 1;
 
 			return $this->make_char();
 
@@ -145,6 +147,14 @@ class File_Source extends Source {
 	public function make_char() {
 
 		return $this->select_char();
+		
+	}
+	
+	public function peek_char() {
+		
+		$peek_pos = $this->current_pos + 1;
+		$peek_char = $this->line[$peek_pos];
+		return $peek_char;
 		
 	}
 	
