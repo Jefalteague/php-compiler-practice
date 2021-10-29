@@ -115,8 +115,8 @@ class My_Language_Scanner extends Scanner{
 					$this->current_char = $this->make_char();
 
 				} else {
-					
-					echo "ERROR"; 
+				// need proper exception handling
+				echo "ERROR: missing '}' " . "line number: " . $this->source->line_number- 1 . " column number: " . $this->source->current_pos -1 ; //make helpers to keep protected properties in source
 					
 					die;
 					
@@ -219,12 +219,49 @@ class My_Language_Scanner extends Scanner{
 	
 	public function number() {
 
-		// Temporary...will need to have dedicated function for looping and selecting different number types
-		$message = 'This is a NUMBER Token';
+		$value = '';
+		
+		while((ctype_digit($this->current_char)) && ($this->current_char != $this->source->config['tokens']['EOL'])) {
 
-		$value = $this->current_char;
+			$value = $value . $this->current_char;
+
+			$this->current_char = $this->make_char();
+
+			if($this->current_char == '.') {
+
+				$value = $value . $this->current_char;
+				
+				$this->current_char = $this->make_char();
+
+				while((ctype_digit($this->current_char)) && ($this->current_char != $this->source->config['tokens']['EOL'])) {
+
+					$value = $value . $this->current_char;
+
+					$this->current_char = $this->make_char();
+
+				}
+				
+				$this->set_back();
+				
+				$message = 'This is a FLOAT NUMBER Token';
+
+				$source = $this->source;
+						
+				$value = (float)$value;
+
+				return new Number_Token($message, $value, $source);
+
+			} 
+
+		}
+		
+		$this->set_back();
+		
+		$message = 'This is a INTEGER NUMBER Token';
 
 		$source = $this->source;
+		
+		$value = (int)$value;
 
 		return new Number_Token($message, $value, $source);
 

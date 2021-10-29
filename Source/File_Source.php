@@ -17,7 +17,7 @@ class File_Source extends Source {
 	
 	protected $current_char;
 	
-	protected $current_pos;
+	public $current_pos;
 	
 	public $line;
 	
