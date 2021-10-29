@@ -158,6 +158,7 @@ class My_Language_Scanner extends Scanner{
 	** @ return string
 	*/
 	/*
+	
 	public function identifier() {
 		
 		$value = '';
