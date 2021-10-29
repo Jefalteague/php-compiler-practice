@@ -157,27 +157,6 @@ class My_Language_Scanner extends Scanner{
 	** Method to use in the make_token() method. Creates the ID and Reserved Words Tokens.
 	** @ return string
 	*/
-	/*
-	
-	public function identifier() {
-		
-		$value = '';
-
-		while(ctype_alpha($this->current_char) && ($this->current_char != $this->source->config['tokens']['EOL'])) {
-			
-			$value = $value . $this->current_char;
-			
-			$this->current_char = $this->make_char();
-
-		}
-		
-		$this->set_back();
-		
-		return $value;
-		
-	}
-	*/
-		
 	
 	public function identifier() {
 		
