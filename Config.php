@@ -28,5 +28,13 @@ return [
 	// boolean (TRUE of FALSE)
 	// to turn on and off messaging output from each step
 	'messaging' => TRUE,
+	
+	'reserved words' => [
+	
+		'BEGIN' => 'BEGIN',
+		'PROCEDURE' => 'PROCEDURE',
+		'BLOCK' => 'BLOCK',
+	
+	]
 
 ];

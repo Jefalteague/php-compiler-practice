@@ -56,7 +56,7 @@ abstract class Token {
 	}
 	
 	public function get_line_number() {
-	
+
 		return $this->line_number;
 
 	}

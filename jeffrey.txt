@@ -1,4 +1,6 @@
-{This is a comment} This is 
+BEGIN
 
+{comment}
+BLOCK
 
-not a comment
+PROCEDURE

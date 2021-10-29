@@ -12,6 +12,7 @@ use Token\Gen_Token as Gen_Token;
 use Token\EOF_Token as EOF_Token;
 use Token\EOL_Token as EOL_Token;
 use Token\Char_Token as Char_Token;
+use Token\Keyword_Token as Keyword_Token;
 
 class My_Language_Scanner extends Scanner{
 
@@ -101,7 +102,7 @@ class My_Language_Scanner extends Scanner{
 				}
 				
 				if($this->current_char == "}") {
-					//echo $this->current_char;
+
 					$this->current_char = $this->make_char();
 
 				} else {
@@ -142,7 +143,7 @@ class My_Language_Scanner extends Scanner{
 	** Method to use in the make_token() method. Creates the ID and Reserved Words Tokens.
 	** @ return string
 	*/
-	
+	/*
 	public function identifier() {
 		
 		$value = '';
@@ -160,6 +161,51 @@ class My_Language_Scanner extends Scanner{
 		return $value;
 		
 	}
+	*/
+		
+	
+	public function identifier() {
+		
+		$value = '';
+		$token;
+
+		while(ctype_alpha($this->current_char) && ($this->current_char != $this->source->config['tokens']['EOL'])) {
+			
+			$value = $value . $this->current_char;
+			
+			$this->current_char = $this->make_char();
+
+		}
+		
+		if(isset($this->source->config['reserved words'][$value])) {
+			
+			$this->set_back();
+			
+			$message = 'This is the ' .  $value . ' keyword';
+		
+			$source = $this->source;
+			
+			$token = new Keyword_Token($message, $value, $source);
+			
+		} else {
+			
+			$this->set_back();
+			
+			$message = 'This is a Char Token.';
+			
+			$source = $this->source;
+
+			$token = new Char_Token($message, $value, $source);
+			
+		}
+
+
+			
+		return $token;
+		
+	}
+	
+	
 	
 	/*
 	** Method to create the various Tokens to return to the Parser.
@@ -187,15 +233,17 @@ class My_Language_Scanner extends Scanner{
 			return new EOL_Token($message = 'This is a EOL token.', $value, $source);
 			
 		} else if(ctype_alpha($this->current_char)) {
-
+/*
 			$source = $this->source;
 			$value = $this->identifier();
 			
 			return new Char_Token($message = 'This is a CHAR token.', $value, $source);
-
+*/
+			return $this->identifier();
+			
 		} else if($this->current_char == '.') {
 			
-			$message = 'This is a period stuck in a loop';
+			$message = 'This is a period. No longer broken. Was broken because...';
 			$value = $this->current_char;
 			$source = $this->source;
 			
