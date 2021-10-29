@@ -177,11 +177,11 @@ class My_Language_Scanner extends Scanner{
 
 		}
 		
-		if(isset($this->source->config['reserved words'][$value])) {
+		if((isset($this->source->config['reserved words'][strtolower($value)])) || isset($this->source->config['reserved words'][strtoupper($value)])) {
 			
 			$this->set_back();
 			
-			$message = 'This is the ' .  $value . ' keyword';
+			$message = 'This is the ' .  strtoupper($value) . ' keyword';
 		
 			$source = $this->source;
 			

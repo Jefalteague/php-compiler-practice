@@ -1,6 +1,7 @@
-BEGIN
+    Begin
+	BEGIN pRoCeDuRe
 
 {comment}
-BLOCK
+bLOCK
 
 PROCEDURE
