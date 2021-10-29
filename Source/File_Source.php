@@ -13,11 +13,11 @@ class File_Source extends Source {
 	
 	/* properties */
 		
-	public $f_open;
+	protected $f_open;
 	
-	private $current_char;
+	protected $current_char;
 	
-	private $current_pos;
+	protected $current_pos;
 	
 	public $line;
 	
@@ -47,9 +47,15 @@ class File_Source extends Source {
 	}
 	
 	/*
-	** Method to rollback the current pos and current char to account for second trip into select_char() from skip_white_space()
+	** Method to rollback the current pos and current char to account for trip into select_char() from skip_white_space().
+	** Helper function to use with identifier(), which uses make_char() and leaves the current_char and current_pos set
+	** which is then overwritten by select_char() when called by next round of parser. set_back() allows the overwrite to
+	** be done correctly, by setting current_pos and current_char one back.
+	**
 	** Use with scanner's identiier() method
-	** Might need to work with lines
+	**
+	** Might need to work with lines?
+	**
 	** @return string current_char
 	*/
 	

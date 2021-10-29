@@ -9,11 +9,11 @@ namespace Token;
 
 use Token\Token as Token;
 
-class Char_Token extends Token {
+class ID_Token extends Token {
 
 	// properties
 	
-	public $type = "CHAR";
+	public $type = "ID";
 	public $value;
 	
 	// methods

@@ -14,6 +14,8 @@ use Token\EOL_Token as EOL_Token;
 use Token\Char_Token as Char_Token;
 use Token\Keyword_Token as Keyword_Token;
 use Token\Special_Symbol_Token as Special_Symbol_Token;
+use Token\ID_Token as ID_Token;
+use Token\Number_Token as Number_Token;
 
 class My_Language_Scanner extends Scanner{
 
@@ -130,22 +132,9 @@ class My_Language_Scanner extends Scanner{
 	}
 	
 	/*
-	** Helper function to use after using identifier(), which uses make_char() and leaves the current_char and current_pos set
-	** which is then overwritten by select_char() when called by next round of parser. set_back prevents the overwrite by setting
-	** current_pos and current_char one back. kind of hacky...might break soon.
-	*/
-	
-	/*
-	public function set_back() {
-	
-		// these need to be accessible through local helper functions
-		$this->source->current_pos = $this->source->current_pos - 1;
-
-		$this->source->current_char = $this->source->line[$this->source->current_pos -1];
-
-		$this->current_char = $this->source->current_char;
-		
-	}
+	** Helper function to use with identifier(), which uses make_char() and leaves the current_char and current_pos set
+	** which is then overwritten by select_char() when called by next round of parser. set_back() allows the overwrite to
+	** be done correctly, by setting current_pos and current_char one back. kind of hacky.
 	*/
 	
 	public function set_back() {
@@ -156,7 +145,8 @@ class My_Language_Scanner extends Scanner{
 	
 	/*
 	** Method to use in the make_token() method. Creates the ID and Reserved Words Tokens.
-	** @ return string
+	**
+	** @return object Keyword_Token || ID_Token
 	*/
 	
 	public function identifier() {
@@ -190,13 +180,19 @@ class My_Language_Scanner extends Scanner{
 			
 			$source = $this->source;
 
-			$token = new Char_Token($message, $value, $source);
+			$token = new ID_Token($message, $value, $source);
 			
 		}
 		
 		return $token;
 		
 	}
+	
+	/*
+	** Method to create a special symbol token.
+	**
+	** @return object Special_Symbol_Token
+	*/
 	
 	public function single_char_token() {
 		
@@ -215,8 +211,9 @@ class My_Language_Scanner extends Scanner{
 	}
 	
 	/*
-	** Method to create the various Tokens to return to the Parser.
-	** @return object
+	** Method to create the various tokens to return to the parser.
+	**
+	** @return object *_Token
 	*/
 	
 	public function make_token() {
@@ -230,34 +227,43 @@ class My_Language_Scanner extends Scanner{
 			$source= $this->source;
 			$value = $this->current_char;
 			
-			return new EOF_Token($message = 'This is a EOF token.', $value, $source);
+			return new EOF_Token($message = 'This is a EOF Token.', $value, $source);
 
 		} else if($this->current_char == $this->source->config['tokens']['EOL']) {
 			
 			$source= $this->source;
 			$value = $this->current_char;
 			
-			return new EOL_Token($message = 'This is a EOL token.', $value, $source);
+			return new EOL_Token($message = 'This is a EOL Token.', $value, $source);
 			
 		} else if(ctype_alpha($this->current_char)) {
-/*
-			$source = $this->source;
-			$value = $this->identifier();
-			
-			return new Char_Token($message = 'This is a CHAR token.', $value, $source);
-*/
+
 			return $this->identifier();
 			
 		} else if(array_search($this->current_char, $this->source->config['single-char-tokens'])) {
 					
 			return $this->single_char_token();
 			
-		} else {
+		} else if(ctype_digit($this->current_char)) {
 			
-			$source= $this->source;
+			// Temporary...will need to have dedicated function for looping
+			$message = 'This is a NUMBER Token';
+
 			$value = $this->current_char;
 			
-			return new Gen_Token($message = 'This is a general token.', $value, $source);
+			$source = $this->source;
+			
+			return new Number_Token($message, $value, $source); 
+			
+		} else {
+			
+			$message = 'This is a GENERAL Token.';
+			
+			$source= $this->source;
+			
+			$value = $this->current_char;
+			
+			return new Gen_Token($message, $value, $source);
 
 		}
 
