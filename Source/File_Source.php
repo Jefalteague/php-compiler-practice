@@ -2,7 +2,7 @@
 
 /*
 ** Class which extends the basic source class.
-** Provides specific functionality for string input.
+** Provides specific functionality for file input.
 */
 
 namespace Source;
@@ -28,6 +28,12 @@ class File_Source extends Source {
 	protected $file;
 	
 	/* methods */
+	
+	
+	/*
+	** Constructor
+	**
+	*/
 	
 	public function __construct($file, $config) {
 		
@@ -69,19 +75,36 @@ class File_Source extends Source {
 		
 	}
 
+	/*
+	** Method to return the opened file.
+	**
+	** @return
+	*/
+	
 	public function get_resource() {
 		
 		return $this->f_open;
 		
 	}
 	
-
+	/*
+	** Method to return the current line number.
+	**
+	** @return int
+	*/
+	
 	public function get_line_number() { // look at the current line number
 		
 		return $this->line_number;
 		
 	}
-		
+	
+	/*
+	** Method to read and return the next line from the open file.
+	** Increments current pos. Increments line number on success.
+	**
+	*/
+
 	public function make_line() {
 	
 		$this->line = fgets($this->f_open);
@@ -100,6 +123,12 @@ class File_Source extends Source {
 		
 	}
 
+	/*
+	** Method to return the current line.
+	**
+	** @return string
+	*/
+	
 	public function get_current_line() {
 		
 		if($this->line == FALSE) {
@@ -112,9 +141,12 @@ class File_Source extends Source {
 		
 	}
 
-	// update the current_char depending on certain contexts
-	// much of this based on the book, i might try to figure out
-	// a personalized approach later, for now, just practice
+
+	/* 
+	** Method to return the current_char, depending on certain contexts.
+	** 
+	** @return string
+	*/
 
 	public function select_char() {
 		

@@ -211,15 +211,35 @@ class My_Language_Scanner extends Scanner{
 	}
 	
 	/*
+	** Method to create and return number token.
+	** Handles integer and floats, depending upon input.
+	**
+	** @return object Number_Token
+	*/
+	
+	public function number() {
+
+		// Temporary...will need to have dedicated function for looping and selecting different number types
+		$message = 'This is a NUMBER Token';
+
+		$value = $this->current_char;
+
+		$source = $this->source;
+
+		return new Number_Token($message, $value, $source);
+
+	}
+
+	/*
 	** Method to create the various tokens to return to the parser.
 	**
 	** @return object *_Token
 	*/
-	
+
 	public function make_token() {
 		
 		$this->skip_white_space();
-		
+
 		// the textbook contains the following, but i don't understand why: $this->current_char = $this->select_char();
 
 		if ($this->current_char == $this->source->config['tokens']['EOF']) {
@@ -245,15 +265,8 @@ class My_Language_Scanner extends Scanner{
 			return $this->single_char_token();
 			
 		} else if(ctype_digit($this->current_char)) {
-			
-			// Temporary...will need to have dedicated function for looping
-			$message = 'This is a NUMBER Token';
 
-			$value = $this->current_char;
-			
-			$source = $this->source;
-			
-			return new Number_Token($message, $value, $source); 
+			return $this->number(); 
 			
 		} else {
 			
