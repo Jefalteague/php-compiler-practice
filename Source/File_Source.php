@@ -15,9 +15,9 @@ class File_Source extends Source {
 		
 	public $f_open;
 	
-	public $current_char;
+	private $current_char;
 	
-	public $current_pos;
+	private $current_pos;
 	
 	public $line;
 	
@@ -43,6 +43,23 @@ class File_Source extends Source {
 			$this->f_open = fopen($file, 'r');
 			
 		}
+		
+	}
+	
+	/*
+	** Method to rollback the current pos and current char to account for second trip into select_char() from skip_white_space()
+	** Use with scanner's identiier() method
+	** Might need to work with lines
+	** @return string current_char
+	*/
+	
+	public function set_back() {
+		
+		$this->current_pos = $this->current_pos - 1;
+
+		$this->current_char = $this->line[$this->current_pos -1];
+		
+		return $this->current_char;
 		
 	}
 

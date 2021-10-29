@@ -40,6 +40,12 @@ class My_Language_Scanner extends Scanner{
 		
 	}
 	
+	public function get_source_current_char() {
+		
+		return $this->source->get_current_char();
+		
+	}
+	
 	/*
 	** Helper methods that access the source
 	** object methods to make it go
@@ -128,6 +134,7 @@ class My_Language_Scanner extends Scanner{
 	** current_pos and current_char one back. kind of hacky...might break soon.
 	*/
 	
+	/*
 	public function set_back() {
 	
 		// these need to be accessible through local helper functions
@@ -136,6 +143,13 @@ class My_Language_Scanner extends Scanner{
 		$this->source->current_char = $this->source->line[$this->source->current_pos -1];
 
 		$this->current_char = $this->source->current_char;
+		
+	}
+	*/
+	
+	public function set_back() {
+		
+		$this->current_char = $this->source->set_back();
 		
 	}
 	
@@ -198,14 +212,10 @@ class My_Language_Scanner extends Scanner{
 			$token = new Char_Token($message, $value, $source);
 			
 		}
-
-
-			
+		
 		return $token;
 		
 	}
-	
-	
 	
 	/*
 	** Method to create the various Tokens to return to the Parser.

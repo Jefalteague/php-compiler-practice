@@ -1,7 +1,1 @@
-    Begin
-	BEGIN pRoCeDuRe
-
-{comment}
-bLOCK
-
-PROCEDURE
+hello there{this is (this is a nested comment) a comment}
