@@ -13,6 +13,7 @@ use Token\EOF_Token as EOF_Token;
 use Token\EOL_Token as EOL_Token;
 use Token\Char_Token as Char_Token;
 use Token\Keyword_Token as Keyword_Token;
+use Token\Special_Symbol_Token as Special_Symbol_Token;
 
 class My_Language_Scanner extends Scanner{
 
@@ -171,7 +172,7 @@ class My_Language_Scanner extends Scanner{
 
 		}
 		
-		if((isset($this->source->config['reserved words'][strtolower($value)])) || isset($this->source->config['reserved words'][strtoupper($value)])) {
+		if((isset($this->source->config['reserved-word-tokens'][strtolower($value)])) || isset($this->source->config['reserved-word-tokens'][strtoupper($value)])) {
 			
 			$this->set_back();
 			
@@ -185,7 +186,7 @@ class My_Language_Scanner extends Scanner{
 			
 			$this->set_back();
 			
-			$message = 'This is a Char Token.';
+			$message = 'This is an ID Token.';
 			
 			$source = $this->source;
 
@@ -194,6 +195,22 @@ class My_Language_Scanner extends Scanner{
 		}
 		
 		return $token;
+		
+	}
+	
+	public function single_char_token() {
+		
+		$value = $this->current_char;
+		
+		if(array_search($this->current_char, $this->source->config['single-char-tokens'])) {
+			
+			$message = 'This is a Special Symbol Token';
+		
+			$source = $this->source;
+			
+			return $token = new Special_Symbol_Token($message, $value, $source);
+			
+		}
 		
 	}
 	
@@ -231,13 +248,9 @@ class My_Language_Scanner extends Scanner{
 */
 			return $this->identifier();
 			
-		} else if($this->current_char == '.') {
-			
-			$message = 'This is a period. No longer broken. Was broken because...';
-			$value = $this->current_char;
-			$source = $this->source;
-			
-			return new Gen_Token($message, $value, $source);
+		} else if(array_search($this->current_char, $this->source->config['single-char-tokens'])) {
+					
+			return $this->single_char_token();
 			
 		} else {
 			
