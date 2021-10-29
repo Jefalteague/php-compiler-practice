@@ -1,7 +1,0 @@
-    Begin
-	BEGIN pRoCeDuRe
-
-{comment}
-bLOCK
-
-PROCEDURE
