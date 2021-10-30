@@ -19,7 +19,7 @@ class Parser_Factory {
 	// determine which source, scanner, and parser should be created
 	public function create_parser($language, $source, $config) {
 		
-		if($language == 'my_language') {
+		if($language == 'My_Language') {
 			
 			if (is_file($source) && file_exists($source)) {
 				

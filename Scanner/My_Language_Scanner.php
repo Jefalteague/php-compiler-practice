@@ -11,25 +11,25 @@ use Source\Source as Source;
 use Token\Gen_Token as Gen_Token;
 use Token\EOF_Token as EOF_Token;
 use Token\EOL_Token as EOL_Token;
-use Token\Char_Token as Char_Token;
+//use Token\Char_Token as Char_Token;
 use Token\Keyword_Token as Keyword_Token;
 use Token\Special_Symbol_Token as Special_Symbol_Token;
 use Token\ID_Token as ID_Token;
 use Token\Number_Token as Number_Token;
 
 class My_Language_Scanner extends Scanner{
-
+/*
 	public $source;
 	protected $current_char;
 	protected $line;
 	private $token;
-	
+	*/
 	public function __construct(Source $source) {
 		
 		$this->source = $source;
 
 	}
-	
+	/*
 	public function get_source() {
 		
 		return $this->source;
@@ -53,7 +53,7 @@ class My_Language_Scanner extends Scanner{
 	** Helper methods that access the source
 	** object methods to make it go
 	*/
-	
+	/*
 	// helper function make a char using source class
 	public function select_char() {
 
@@ -67,7 +67,9 @@ class My_Language_Scanner extends Scanner{
 		$this->line = $this->source->make_line();
 		
 	}
+	*/
 	
+	/*
 	// look at the opened file
 	public function get_resource() {
 		
@@ -95,7 +97,7 @@ class My_Language_Scanner extends Scanner{
 		echo "<br />";
 		
 	}
-
+*/
 	public function skip_white_space() {
 		
 		$this->current_char = $this->select_char();
@@ -130,19 +132,19 @@ class My_Language_Scanner extends Scanner{
 		}
 		
 	}
-	
+
 	/*
 	** Helper function to use with identifier(), which uses make_char() and leaves the current_char and current_pos set
 	** which is then overwritten by select_char() when called by next round of parser. set_back() allows the overwrite to
 	** be done correctly, by setting current_pos and current_char one back. kind of hacky.
 	*/
-	
+/*
 	public function set_back() {
 		
 		$this->current_char = $this->source->set_back();
 		
 	}
-	
+*/
 	/*
 	** Method to use in the make_token() method. Creates the ID and Reserved Words Tokens.
 	**
@@ -166,7 +168,7 @@ class My_Language_Scanner extends Scanner{
 			
 			$this->set_back();
 			
-			$message = 'This is the ' .  strtoupper($value) . ' keyword';
+			$message = 'This is the ' .  strtoupper($value) . ' Keyword ID Token';
 		
 			$source = $this->source;
 			
