@@ -12,6 +12,7 @@ abstract class Token {
 	
 	// properties
 	
+	//need to change these to protected
 	public $message; // the message passed in
 	public $type; // the token's type
 	public $value; // the token's value
@@ -66,4 +67,6 @@ abstract class Token {
 		return $this->column_number;
 
 	}
+	
+	protected function extract() {}
 }

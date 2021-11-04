@@ -11,6 +11,8 @@ use Parser\Parser as Parser;
 use Scanner\My_Language_Scanner as My_Language_Scanner;
 use Token\EOF_Token as EOF_Token;
 use Message\Message_Handler as Message_Handler;
+use Message\Message_Listener as Message_Listener;
+use Message\Message as Message;
 
 class My_Language_Parser extends Parser {
 	
@@ -30,15 +32,15 @@ class My_Language_Parser extends Parser {
 	public function get_int_rep() {}
 	public function get_symb_tab() {}
 	
-	public function add_listener($listener) {
+	public function add_listener(Message_Listener $listener) {
 		
 		$this->message_handler->add_listener($listener);
 		
 	}
 	
-	public function send_message() {
+	public function send_message($message, $token_array) {
 		
-		$this->message_handler->send_message();
+		$this->message_handler->send_message($message, $token_array);
 		
 	}
 
@@ -60,7 +62,15 @@ class My_Language_Parser extends Parser {
 		
 		if($this->config['messaging'] == TRUE) {
 			
-			$this->message_handler->send_message($message = 'VOICY MODE', $token_array = $token_array);
+			if(in_array('PARSER_SUMMARY', $this->config['message_type'])) {
+				
+				$type = 'PARSER_SUMMARY';
+				
+			}
+			
+			$message = new Message($type);
+			
+			$this->send_message($message, $token_array);
 			
 		} else {
 			
@@ -69,5 +79,7 @@ class My_Language_Parser extends Parser {
 		}
 
 	}
+	
+public function program() {}
 	
 }

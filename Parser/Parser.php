@@ -10,7 +10,7 @@ namespace Parser;
 use Scanner as Scanner;
 use Message\Message_Maker as Message_Maker;
 use Message\Message_Handler as Message_Handler;
-use Message\Message_Listener_abs as Message_Listener_abs;
+use Message\Message_Listener as Message_Listener;
 use Message\Parser_Listener as Parser_Listener;
 
 abstract class Parser implements Message_Maker {
@@ -31,11 +31,11 @@ abstract class Parser implements Message_Maker {
 		
 	}
 	
-	abstract public function add_listener($listener);
+	abstract public function add_listener(Message_Listener $listener);
 	
-	public function remove_listener() {}
+	public function remove_listener(Message_Listener $listener) {}
 	
-	public function send_message() {}
+	public function send_message($message, $token_array) {}
 	
 	abstract public function get_scanner();
 	

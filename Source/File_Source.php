@@ -207,7 +207,7 @@ class File_Source extends Source {
 	
 	public function peek_char() {
 		
-		$peek_pos = $this->current_pos + 1;
+		$peek_pos = $this->current_pos;
 		
 		$peek_char = $this->line[$peek_pos];
 		

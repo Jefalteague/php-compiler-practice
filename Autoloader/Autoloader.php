@@ -33,6 +33,7 @@ class Autoloader {
 			self::$singleton ++;
 		
 		}
+		
 	}
 
 	public static function load_file($file) {

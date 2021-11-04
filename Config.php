@@ -49,7 +49,7 @@ return [
 	
 	],
 	
-	// single-hcar-tokens
+	// single-char-tokens
 	'single-char-tokens' => [
 	
 		'PLUS' => '+',
@@ -63,6 +63,26 @@ return [
 		'DOT' => '.',
 		'COMMA' => ','
 	
-	]
+	],
+	
+	// message types
+	
+	'message_type' => [
+	
+		'SOURCE_LINE',
+		'SYNTAX_ERROR',
+		'PARSER_SUMMARY',
+		'INTERPRETER_SUMMARY',
+		'COMPILER_SUMMARY',
+		'MISCELLANEOUS',
+		'TOKEN',
+		'ASSIGN',
+		'FETCH',
+		'BREAKPOINT',
+		'RUNTIME_ERROR',
+		'CALL',
+		'RETURN',
+
+	],
 
 ];

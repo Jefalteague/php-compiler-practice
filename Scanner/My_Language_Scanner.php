@@ -16,20 +16,24 @@ use Token\Keyword_Token as Keyword_Token;
 use Token\Special_Symbol_Token as Special_Symbol_Token;
 use Token\ID_Token as ID_Token;
 use Token\Number_Token as Number_Token;
+use Token\Assignment_Token as Assignment_Token;
 
 class My_Language_Scanner extends Scanner{
-/*
+	
+	/* Moved to Parent
 	public $source;
 	protected $current_char;
 	protected $line;
 	private $token;
 	*/
+	
 	public function __construct(Source $source) {
 		
 		$this->source = $source;
 
 	}
-	/*
+	
+	/* Moved to Parent
 	public function get_source() {
 		
 		return $this->source;
@@ -133,18 +137,18 @@ class My_Language_Scanner extends Scanner{
 		
 	}
 
-	/*
+	/* Moved to Parent
 	** Helper function to use with identifier(), which uses make_char() and leaves the current_char and current_pos set
 	** which is then overwritten by select_char() when called by next round of parser. set_back() allows the overwrite to
 	** be done correctly, by setting current_pos and current_char one back. kind of hacky.
 	*/
-/*
+	/*
 	public function set_back() {
 		
 		$this->current_char = $this->source->set_back();
 		
 	}
-*/
+	*/
 	/*
 	** Method to use in the make_token() method. Creates the ID and Reserved Words Tokens.
 	**
@@ -268,6 +272,12 @@ class My_Language_Scanner extends Scanner{
 		return new Number_Token($message, $value, $source);
 
 	}
+	
+	public function peek_char() {
+		
+		return $this->source->peek_char();
+		
+	}
 
 	/*
 	** Method to create the various tokens to return to the parser.
@@ -284,6 +294,7 @@ class My_Language_Scanner extends Scanner{
 		if ($this->current_char == $this->source->config['tokens']['EOF']) {
 			
 			$source= $this->source;
+			
 			$value = $this->current_char;
 			
 			return new EOF_Token($message = 'This is a EOF Token.', $value, $source);
@@ -291,6 +302,7 @@ class My_Language_Scanner extends Scanner{
 		} else if($this->current_char == $this->source->config['tokens']['EOL']) {
 			
 			$source= $this->source;
+			
 			$value = $this->current_char;
 			
 			return new EOL_Token($message = 'This is a EOL Token.', $value, $source);
@@ -299,13 +311,25 @@ class My_Language_Scanner extends Scanner{
 
 			return $this->identifier();
 			
-		} else if(array_search($this->current_char, $this->source->config['single-char-tokens'])) {
-					
-			return $this->single_char_token();
-			
 		} else if(ctype_digit($this->current_char)) {
 
 			return $this->number(); 
+			
+		} else if($this->current_char == ':' && $this->peek_char() == '=') {
+
+			$message = 'This is an Assignment Token.';
+			
+			$value = $this->source->config['tokens']['ASSIGN'];
+			
+			$source = $this->source;
+			
+			$this->make_char();
+			
+			return new Assignment_Token($message, $value, $source);
+			
+		} else if(array_search($this->current_char, $this->source->config['single-char-tokens'])) {
+					
+			return $this->single_char_token();
 			
 		} else {
 			

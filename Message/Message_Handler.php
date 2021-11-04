@@ -2,21 +2,21 @@
 
 namespace Message;
 
-use Message\Message_Listener_abs as Message_Listener_abs;
+use Message\Message_Listener as Message_Listener;
 
 class Message_Handler {
 	
 	// properties
 	
+	public $message;
 	public $listeners = [];
 	
 	// methods 
 	
 	public function add_listener($listener) {
-		//var_dump($listener);
+
 		$this->listeners[] = $listener;
-		//var_dump($this->listeners);
-		
+
 	}
 	
 	public function remove_listener($listener) {
@@ -25,17 +25,18 @@ class Message_Handler {
 		
 	}
 	
-	public function send_message($message, $token_array = NULL) {
+	public function send_message(Message $message, $token_array = NULL) {
 		
+		$this->message = $message;
 		$this->notify_listeners($message, $token_array);
 		
 	}
 	
-	public function notify_listeners($message, $token_array) {
+	public function notify_listeners(Message $message, $token_array) {
 		
 		foreach($this->listeners as $listener) {
-			//var_dump($this->listeners);
-			return $listener->message_got($message, $token_array);
+
+			return $listener->message_got($this->message, $token_array);
 			
 		}
 		
