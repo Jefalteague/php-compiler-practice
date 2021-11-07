@@ -22,7 +22,7 @@ $parser_factory = new Parser_Factory();
 
 $parser_listener = new Parser_Listener();
 
-$parser = $parser_factory->create_parser($config['language'], 'jeffrey.txt', $config);
+$parser = $parser_factory->create_parser($config['language'], 'stroffset_problem.txt', $config);
 
 $parser->add_listener($parser_listener);
 

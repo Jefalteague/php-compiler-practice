@@ -34,16 +34,7 @@ abstract class Scanner {
 		return $this->current_char;
 		
 	}
-	
-	public function var_dump_source() {
-		
-		echo "<pre>";
-		echo var_dump($this->source);
-		echo "</pre>";
-		
-	}
-	
-		
+
 	public function get_source_current_char() {
 		
 		return $this->source->get_current_char();

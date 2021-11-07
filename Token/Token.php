@@ -7,7 +7,6 @@
 
 namespace Token;
 
-
 abstract class Token {
 	
 	// properties
@@ -69,4 +68,8 @@ abstract class Token {
 	}
 	
 	protected function extract() {}
+	
+	protected function peek_char() {}
+	
+	
 }

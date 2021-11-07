@@ -1,0 +1,15 @@
+<?php
+
+/*
+** The Error_Token class.
+** Scanner returns upon scanner error, such as finding an invalid character.
+**
+*/
+
+namespace Token;
+
+class Error_Token extends Token{
+
+
+
+}

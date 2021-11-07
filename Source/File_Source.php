@@ -15,7 +15,7 @@ class File_Source extends Source {
 		
 	protected $f_open;
 	
-	protected $current_char;
+	public $current_char;
 	
 	public $current_pos;
 	
@@ -25,7 +25,7 @@ class File_Source extends Source {
 	
 	public $config;
 	
-	protected $file;
+	public $file;
 	
 	/* methods */
 	
@@ -38,8 +38,11 @@ class File_Source extends Source {
 	public function __construct($file, $config) {
 		
 		$this->current_pos = -2;
+		
 		$this->line_number = 0;
+		
 		$this->config = $config;
+		
 		$this->file = $file;
 
 		if(file_exists($file)) {
@@ -140,7 +143,6 @@ class File_Source extends Source {
 		return $this->line;
 		
 	}
-
 
 	/* 
 	** Method to return the current_char, depending on certain contexts.

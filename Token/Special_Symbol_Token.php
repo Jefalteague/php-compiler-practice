@@ -7,9 +7,7 @@
 
 namespace Token;
 
-use Token\Token as Token;
-
-class Special_Symbol_Token extends Token {
+class Special_Symbol_Token extends My_Language_Token {
 
 	// properties
 	

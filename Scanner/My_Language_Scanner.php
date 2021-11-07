@@ -8,100 +8,35 @@ namespace Scanner;
 
 use Scanner\Scanner as Scanner;
 use Source\Source as Source;
-use Token\Gen_Token as Gen_Token;
-use Token\EOF_Token as EOF_Token;
-use Token\EOL_Token as EOL_Token;
-//use Token\Char_Token as Char_Token;
-use Token\Keyword_Token as Keyword_Token;
-use Token\Special_Symbol_Token as Special_Symbol_Token;
-use Token\ID_Token as ID_Token;
-use Token\Number_Token as Number_Token;
+//use Token\Gen_Token as Gen_Token;
+// delete when new classes function correctly
+// COMMENT OUT TO TEST...
+//use Token\EOF_Token as EOF_Token;
+//use Token\EOL_Token as EOL_Token;
+// add new tokens...
+// UNCOMMENT OUT TO TEST...
+ use Token\EOF_Token2 as EOF_Token2;
+ use Token\EOL_Token2 as EOL_Token2;
+ use Token\Word_Token2 as Word_Token2;
+//use Token\Keyword_Token as Keyword_Token;
+//use Token\Special_Symbol_Token as Special_Symbol_Token;
+use Token\Special_Symbol_Token2 as Special_Symbol_Token2;
+// COMMENT OUT TO TEST...
+//use Token\ID_Token as ID_Token;
+// COMMENT OUT TO TEST...
+//use Token\Number_Token as Number_Token;
+use Token\Number_Token2 as NUmber_Token2;
 use Token\Assignment_Token as Assignment_Token;
+use Token\Error_Token as Error_Token;
 
-class My_Language_Scanner extends Scanner{
-	
-	/* Moved to Parent
-	public $source;
-	protected $current_char;
-	protected $line;
-	private $token;
-	*/
+class My_Language_Scanner extends Scanner {
 	
 	public function __construct(Source $source) {
 		
 		$this->source = $source;
 
 	}
-	
-	/* Moved to Parent
-	public function get_source() {
-		
-		return $this->source;
-		
-	}
-		
-	// return the current char that is taken from the source
-	public function get_current_char() {
-		
-		return $this->current_char;
-		
-	}
-	
-	public function get_source_current_char() {
-		
-		return $this->source->get_current_char();
-		
-	}
-	
-	/*
-	** Helper methods that access the source
-	** object methods to make it go
-	*/
-	/*
-	// helper function make a char using source class
-	public function select_char() {
 
-		return $this->source->select_char();
-		
-	}
-	
-	// helper function make a line using source class
-	public function make_line() {
-		
-		$this->line = $this->source->make_line();
-		
-	}
-	*/
-	
-	/*
-	// look at the opened file
-	public function get_resource() {
-		
-		return $this->source->get_resource();
-		
-	}
-	
-	// look at the current line number
-	public function get_line_number() {
-		
-		return $this->source->get_line_number();
-		
-	}
-	
-	public function make_char() {
-		
-		return $this->source->make_char();
-		
-	}
-	
-	public function vardump ($object) {
-		
-		echo "<br />Var Dump: ";
-		var_dump($object);
-		echo "<br />";
-		
-	}
-*/
 	public function skip_white_space() {
 		
 		$this->current_char = $this->select_char();
@@ -110,7 +45,7 @@ class My_Language_Scanner extends Scanner{
 
 			if($this->current_char == "{") {
 				
-				while(($this->current_char != "}") && ($this->current_char != $this->source->config['tokens']['EOL'])) {
+				while(($this->current_char != "}") ) {
 					
 					$this->current_char = $this->make_char();
 
@@ -295,44 +230,105 @@ class My_Language_Scanner extends Scanner{
 			
 			$source= $this->source;
 			
-			$value = $this->current_char;
+			// DESCRIPTION OF MOD: remove when new classes function correctly
 			
-			return new EOF_Token($message = 'This is a EOF Token.', $value, $source);
+			// COMMENT OUT TO TEST
+			//$value = $this->current_char;
+			
+			// DESCRIPTION OF MOD: move all logic into strategized subclasses of My_Language_Token
+			// return new EOF token
+			
+			// UNCOMMENT OUT TO TEST...
+			 return new EOF_Token2($source);
+			
+			// COMMENT OUT TO TEST...
+			//return new EOF_Token($message = 'This is a EOF Token.', $value, $source);
 
 		} else if($this->current_char == $this->source->config['tokens']['EOL']) {
 			
 			$source= $this->source;
 			
-			$value = $this->current_char;
+			// DESCRIPTION OF MOD: remove when new classes function correctly
 			
-			return new EOL_Token($message = 'This is a EOL Token.', $value, $source);
+			// COMMENT OUT TO TEST
+			//$value = $this->current_char;
+			
+			// DESCRIPTION OF MOD: move all logic into strategized subclasses of My_Language_Token
+			// return new EOL token
+			
+			
+			// UNCOMMENT OUT TO TEST...
+			return new EOL_Token2($source);
+			
+			// COMMENT OUT TO TEST...			
+			//return new EOL_Token($message = 'This is a EOL Token.', $value, $source);
 			
 		} else if(ctype_alpha($this->current_char)) {
-
-			return $this->identifier();
 			
-		} else if(ctype_digit($this->current_char)) {
-
-			return $this->number(); 
+			// DESCRIPTION OF MOD: move all logic into strategized subclasses of My_Language_Token
+			// add $source
+			// return new Word token
 			
-		} else if($this->current_char == ':' && $this->peek_char() == '=') {
-
-			$message = 'This is an Assignment Token.';
-			
-			$value = $this->source->config['tokens']['ASSIGN'];
-			
+			// UNCOMMENT OUT TO TEST...
 			$source = $this->source;
 			
-			$this->make_char();
+			// UNCOMMENT OUT TO TEST...
+			return new Word_Token2($source);
 			
-			return new Assignment_Token($message, $value, $source);
+			// COMMENT OUT TO TEST...
+			//return $this->identifier();
 			
-		} else if(array_search($this->current_char, $this->source->config['single-char-tokens'])) {
-					
-			return $this->single_char_token();
+		} else if(ctype_digit($this->current_char)) {
+			
+			// DESCRIPTION OF MOD: move all logic into strategized subclasses of My_Language_Token
+			// add $source
+			// return new Number token
+			
+			// UNCOMMENT OUT TO TEST...
+			$source = $this->source;
+			
+			// UNCOMMENT OUT TO TEST...
+			return new Number_Token2($source);
+			
+			// COMMENT OUT TO TEST...
+			//return $this->number(); 
+			
+	//	} else if($this->current_char == ':' && $this->peek_char() == '=') {
+
+		//	$message = 'This is an Assignment Token.';
+			
+		//	$value = $this->source->config['tokens']['ASSIGN'];
+			
+		//	$source = $this->source;
+			
+		//	$this->make_char();
+			
+		//	return new Assignment_Token($message, $value, $source);
+			
+		} else if((array_search($this->current_char, $this->source->config['single-char-tokens']))
+			
+			|| (array_search($this->current_char == ':' && $this->peek_char() == '=', $this->source->config['tokens']))) {
+			
+			// DESCRIPTION OF MOD: move all logic into strategized subclasse of My_Language_Token
+			// add $source
+			// return new Special_Symbol_Token2
+			
+			// COMMENT OUT TO TEST...
+			//return $this->single_char_token();
+			
+			// UNCOMMENT OUT TO TEST...
+			$source = $this->source;
+			
+			// UNCOMMENT OUT TO TEST...
+			return new Special_Symbol_Token2($source);
 			
 		} else {
 			
+			$source = $this->source;
+			
+			return new Error_Token($source);
+				
+		/* removed to work with error token...don't need it
 			$message = 'This is a GENERAL Token.';
 			
 			$source= $this->source;
@@ -340,7 +336,7 @@ class My_Language_Scanner extends Scanner{
 			$value = $this->current_char;
 			
 			return new Gen_Token($message, $value, $source);
-
+*/
 		}
 
 	}

@@ -19,7 +19,7 @@ return [
 	],
 	
 	// boolean (TRUE of FALSE)
-	// to turn on and off messaging output from each step
+	// to turn on and off parser messaging
 	'messaging' => TRUE,
 	
 	// general tokens
@@ -31,6 +31,7 @@ return [
 		'INTEGER_CONST' => 'INTEGER_CONST',
 		'REAL_CONST' => 'REAL_CONST',
 		'ASSIGN' => ':=',
+		'ERROR' => 'ERROR',
 
 	],
 	
@@ -61,7 +62,8 @@ return [
 		'LPAREN' => '(',
 		'RPAREN' => ')',
 		'DOT' => '.',
-		'COMMA' => ','
+		'COMMA' => ',',
+		'EQUAL' => '=',
 	
 	],
 	
@@ -84,5 +86,13 @@ return [
 		'RETURN',
 
 	],
+	
+	'pascal_error_code' => [
+	
+		'INVALID_CHARACTER' => 'Invalid Character',
+		'INVALID_CONSTANT' => 'Invalid Constant',
+		'INVALID EXPRESSION' => 'Invalid Expression',
+	
+	]
 
 ];

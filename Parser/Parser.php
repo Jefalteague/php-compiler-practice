@@ -35,7 +35,13 @@ abstract class Parser implements Message_Maker {
 	
 	public function remove_listener(Message_Listener $listener) {}
 	
-	public function send_message($message, $token_array) {}
+	// DESCRIPTION OF MOD:  get rid of $token_array
+	
+	// COMMENT OUT TO TEST...
+	//public function send_message($message, $token_array) {}
+	
+	// UNCOMMENT OUT TO TEST...
+	public function send_message($message) {}	
 	
 	abstract public function get_scanner();
 	
