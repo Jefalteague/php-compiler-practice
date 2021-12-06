@@ -9,11 +9,17 @@ namespace Source;
 
 abstract class Source {
 	
-	// properties
+	/* Properties
+	**
+	**
+	*/
 	
 	protected $source;
 	
-	// methods
+	/* Methods
+	**
+	**
+	*/
 	
 	public function get_source() { // return the source name string passed in
 		

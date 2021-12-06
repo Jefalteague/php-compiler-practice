@@ -22,7 +22,7 @@ class Scanner_Factory {
 	// determine which scanner should be created, 
 	public function create_scanner($language, $source, $config) {
 		
-		if($language == 'my_language' && is_file($source)) {
+		if($language == 'my_language' && is_file($source) && file_exists($source)) {
 			
 			echo "this is in the file block<br />";
 			

@@ -18,7 +18,7 @@ return [
 		],
 	],
 	
-	// boolean (TRUE of FALSE)
+	// boolean (TRUE or FALSE)
 	// to turn on and off parser messaging
 	'messaging' => TRUE,
 	

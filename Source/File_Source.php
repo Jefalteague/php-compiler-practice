@@ -9,41 +9,54 @@ namespace Source;
 
 use Source\Source as Source;
 
+/**
+ * File_Source
+ */
+
 class File_Source extends Source {
 	
-	/* properties */
-		
+	/* Properties
+	**
+	**
+	*/
+
+	// Store the source file passed into the contructor
+	public $file;
+
+	// Store the config file...currently passed in to constructor (is there a better way?)
+	public $config;
+
+	// Store the source file once opened
 	protected $f_open;
 	
+	// Store the most recent found char
 	public $current_char;
 	
+	// Store the current curser position
 	public $current_pos;
 	
+	// Store the current line obtained from the opened file
 	public $line;
 	
+	// Store the current line number
 	public $line_number;
 	
-	public $config;
-	
-	public $file;
-	
-	/* methods */
-	
-	
-	/*
-	** Constructor
+	/* Methods
+	**
 	**
 	*/
 	
+	// Constructor...start the process
 	public function __construct($file, $config) {
-		
+
+		$this->file = $file;
+
+		$this->config = $config;
+
+		// Set the initial cursor position to -2 to account for the select_char() logic
 		$this->current_pos = -2;
 		
 		$this->line_number = 0;
-		
-		$this->config = $config;
-		
-		$this->file = $file;
 
 		if(file_exists($file)) {
 					
