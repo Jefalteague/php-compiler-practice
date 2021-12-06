@@ -1,1 +1,15 @@
-;
+PROGRAM
+
+	TYPE
+
+		enum := (itemOne, itemTwo, itemThree)
+
+	VAR {comment}
+	
+		function functionname({parameters go here}):
+
+	BEGIN
+
+		a := 2.1326;
+
+	END.

@@ -307,7 +307,7 @@ class My_Language_Scanner extends Scanner {
 			
 		} else if((array_search($this->current_char, $this->source->config['single-char-tokens']))
 			
-			|| (array_search($this->current_char == ':' && $this->peek_char() == '=', $this->source->config['tokens']))) {
+			|| (array_search($this->current_char && $this->peek_char(), $this->source->config['tokens']))) {
 			
 			// DESCRIPTION OF MOD: move all logic into strategized subclasse of My_Language_Token
 			// add $source

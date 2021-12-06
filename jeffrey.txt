@@ -1,21 +1,33 @@
 PROGRAM firstprogram
 
-	BLOCK
-
-		VAR{comment}
+	VAR{comment}
+	
+		a, b, c: INTEGER;
 		
+	PROCEDURE (d: REAL)
+		
+		BEGIN
+		
+			e := 22.2345;
+		
+		END
+		
+	BEGIN
+	
+		VAR{comment}
+	
 			a, b, c: INTEGER;
-			
+		
 		PROCEDURE (d: REAL)
-			
-			BLOCK
-			
+		
 			BEGIN
 			
 				e := 22.2345;
 			
 			END
 		
-	BEGIN
+		BEGIN
+		
+		END
 	
 	END;

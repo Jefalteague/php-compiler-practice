@@ -116,10 +116,15 @@ class File_Source extends Source {
 		// of code after a blank line
 		// $this->line = rtrim($this->line, "\n\r");
 
-		$this->current_pos = -1;
+		// 11/10 move the following to the if statement
+		
+		// COMMENT OUT TO TEST...
+		// $this->current_pos = -1;
 
 		if($this->line != FALSE) {
-
+			
+			$this->current_pos = -1;
+			
 			++ $this->line_number;
 
 		}
@@ -164,13 +169,13 @@ class File_Source extends Source {
 
 			if(is_resource($this->f_open)) {
 				
-				if (feof($this->f_open)){
+				if(feof($this->f_open)) {
 					
 					fclose($this->f_open);
 					
 				}
 				
-			}
+			} // else error?
 
 			return $this->config['tokens']['EOF'];
 			
@@ -180,11 +185,15 @@ class File_Source extends Source {
 			$this->current_pos = $this->current_pos + 1;
 			
 			return $this->config['tokens']['EOL'];
-			
+
 		// read new line
 		} else if($this->current_pos > strlen($this->line)) {
 
 			$this->make_line();
+			
+			// 11/09 added
+			// UNCOMMENT OUT TO TEST...
+			$this->current_pos = $this->current_pos + 1;
 
 			return $this->make_char();
 

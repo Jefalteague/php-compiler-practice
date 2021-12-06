@@ -58,7 +58,6 @@ return [
 		'DIVISION' => '/',
 		'MULTIPLICATION' => '*',
 		'SEMI' => ';',
-		'COLON' => ':',
 		'LPAREN' => '(',
 		'RPAREN' => ')',
 		'DOT' => '.',
