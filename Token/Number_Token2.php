@@ -30,7 +30,7 @@ class Number_Token2 extends My_Language_Token2 {
 
 		$value = '';
 		
-		while((ctype_digit($source->get_current_char())) && ($source->get_current_char() != $source->config['tokens']['EOL'])) {
+		while((ctype_digit($source->get_current_char()))) {
 
 			$value = $value . $source->get_current_char();
 
@@ -40,13 +40,13 @@ class Number_Token2 extends My_Language_Token2 {
 
 				$value = $value . $source->get_current_char();
 
-				$source->make_char();
+				$source->current_char = $source->make_char();
 	
-				while((ctype_digit($source->get_current_char())) && ($source->get_current_char() != $source->config['tokens']['EOL'])) {
+				while((ctype_digit($source->get_current_char()))) {
 
 					$value = $value . $source->get_current_char();
 
-					$source->make_char();
+					$source->current_char = $source->make_char();
 
 				}
 				
