@@ -13,6 +13,14 @@ use Token\My_Language_Token2 as My_Language_Token2;
 class Error_Token extends My_Language_Token2 {
 
 	// properties
+
+	public $source;
+	public $line_number;
+	public $column_number;
+	public $text;
+	public $type;
+	public $value;
+	public $choke;
 	
 	// methods
 	
@@ -34,7 +42,9 @@ class Error_Token extends My_Language_Token2 {
 		
 		$this->type = 'ERROR';
 		
-		$this->value = $this->get_current_char();
+		$this->value = 'SYNTAX_ERROR';
+
+		$this->choke = 'Invalid Character';
 
 	}
 

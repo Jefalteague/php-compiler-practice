@@ -305,9 +305,9 @@ class My_Language_Scanner extends Scanner {
 			
 		//	return new Assignment_Token($message, $value, $source);
 			
-		} else if((array_search($this->current_char, $this->source->config['single-char-tokens']))
+		} else if((array_search($this->current_char, $this->source->config['single-char-tokens'], true))
 			
-			|| (array_search($this->current_char && $this->peek_char(), $this->source->config['tokens']))) {
+			|| (array_search($this->current_char . $this->peek_char(), $this->source->config['tokens']))) {
 			
 			// DESCRIPTION OF MOD: move all logic into strategized subclasse of My_Language_Token
 			// add $source
@@ -315,10 +315,17 @@ class My_Language_Scanner extends Scanner {
 			
 			// COMMENT OUT TO TEST...
 			//return $this->single_char_token();
-			
+/*
+			var_dump($this->current_char);
+			die;
+			*/
 			// UNCOMMENT OUT TO TEST...
 			$source = $this->source;
-			
+
+			//var_dump($this->current_char);
+			//var_dump($this->source->config['single-char-tokens']);
+		
+			//die;
 			// UNCOMMENT OUT TO TEST...
 			return new Special_Symbol_Token2($source);
 			

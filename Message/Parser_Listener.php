@@ -105,15 +105,7 @@ class Parser_Listener implements Message_Listener {
 	public function message_got($message) {
 		
 		$this->message = $message;
-		
-		echo "<br />";
-		echo "My_Language Output";
-		echo "<hr style='width:50%;text-align:left;margin-left:0'>"; // echo styled line
-		
-		echo "<br />";
-		echo $this->message->get_message_type();
-		echo "<br />";
-		
+
 		$type = $this->message->get_message_type();
 		
 		if(!($this->token_array === NULL)) { // check to make certain the data is there	
@@ -121,9 +113,18 @@ class Parser_Listener implements Message_Listener {
 			switch($type) {
 
 				case 'TOKEN': // if token type is not ERROR
-	
+			
+					// formatted message
+					echo "<br />";
+					echo "My_Language Output";
+					echo "<hr style='width:50%;text-align:left;margin-left:0'>"; // echo styled line
+					
+					echo "<br />";
+					echo $type;
+					echo "<br />";
+					
 					foreach($this->message->get_data() as $data) { // loop through the array of arrays
-						
+					
 						foreach($data as $key => $datum) { // loop through the second level of arrays, $x is the key
 							
 							echo "<i>"; // echo block starts
@@ -141,10 +142,34 @@ class Parser_Listener implements Message_Listener {
 					break;
 				
 				case 'ERROR': // if token type is ERROR
-				
-					echo 'There is a syntax error somewherror.';
 					
+					// formatted message
+					echo "<br />";
+					echo "My_Language Errors";
+					echo "<hr style='width:50%;text-align:left;margin-left:0'>"; // echo styled line
+					
+					echo "<br />";
+					echo $type;
+					echo "<br />";
+
+					foreach($this->message->get_data() as $data) { // loop through the array of arrays
+						
+						foreach($data as $key => $datum) { // loop through the second level of arrays, $x is the key
+							
+							echo "<i>"; // echo block starts
+							echo "<br />Token " . $key . ": "; // echo key value
+							echo "</i>";
+							echo $datum; // echo data value
+							echo "<br />"; // echo block ends
+							
+						}
+					
+						echo "<hr style='width:50%;text-align:left;margin-left:0'>"; // echo styled line
+					
+					}
+
 					break;
+				break;
 					
 				case 'PARSER_SUMMARY':
 				

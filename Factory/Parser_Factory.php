@@ -65,6 +65,7 @@ class Parser_Factory {
 		} else {
 			
 			echo "<br />unsupported language<br />";
+			die;
 			
 		}
 	}

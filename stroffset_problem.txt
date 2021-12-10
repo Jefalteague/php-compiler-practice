@@ -6,7 +6,7 @@ PROGRAM
 
 	VAR {comment}
 	
-		function functionname({parameters go here}):
+		function functionname({parameters go here})
 
 	BEGIN
 

@@ -63,6 +63,8 @@ return [
 		'DOT' => '.',
 		'COMMA' => ',',
 		'EQUAL' => '=',
+		'COLON' => ':',
+		// more to come
 	
 	],
 	

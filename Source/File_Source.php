@@ -233,9 +233,15 @@ class File_Source extends Source {
 		
 		$peek_pos = $this->current_pos;
 		
-		$peek_char = $this->line[$peek_pos];
-		
-		return $peek_char;
+		if ($peek_pos < strlen($this->line)) {
+
+			return $peek_char = $this->line[$peek_pos];
+
+		} else {
+
+			return 'EOL';
+
+		}
 		
 	}
 	
