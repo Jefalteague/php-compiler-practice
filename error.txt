@@ -1,4 +1,7 @@
-13456.34       
+Program
 
+Begin
 
+    a = 23
 
+End.   

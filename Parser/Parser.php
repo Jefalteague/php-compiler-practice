@@ -7,47 +7,72 @@
 
 namespace Parser;
 
-use Scanner as Scanner;
+use Token\Token2;
+use Scanner\Scanner as Scanner;
 use Message\Message_Maker as Message_Maker;
 use Message\Message_Handler as Message_Handler;
-use Message\Message_Listener as Message_Listener;
 use Message\Parser_Listener as Parser_Listener;
+use Message\Message_Listener as Message_Listener;
+use Scanner\My_Language_Scanner as My_Language_Scanner;
 
 abstract class Parser implements Message_Maker {
 	
-	// properties
+	/* Properties
+	**
+	**
+	*/
 	
-	protected $int_rep;
+	protected $ast;
 	protected $symb_tab;
 	protected $scanner;
-	public $message_handler;
+	protected $message_handler;
+	public $config;
 	
-	// methods
+	/* Methods 
+	**
+	**
+	*/
 	
-	public function __construct() {
+	public function __construct(Scanner $scanner, Message_Handler $message_handler, $config) {
 		
-		//$this->message_handler = new Message_Handler();
-		//var_dump($this->message_handler);
+		$this->ast = NULL;
+		$this->symb_tab = NULL;
+		$this->scanner = $scanner;
+		$this->message_handler = $message_handler;
+		$this->config = $config;
 		
 	}
 	
-	abstract public function add_listener(Message_Listener $listener);
+	public function add_listener(Message_Listener $listener):void {
+		
+		$this->message_handler->add_listener($listener);
+		
+	}
 	
-	public function remove_listener(Message_Listener $listener) {}
+	public function remove_listener(Message_Listener $listener):void {
+
+		$this->message_handler->remove_listener($listener);
+
+	}
+
+	public function send_message($message):void {
+		
+		$this->message_handler->send_message($message);
+		
+	}
+
+	public function make_token():Token2 {
 	
-	// DESCRIPTION OF MOD:  get rid of $token_array
+		return $this->scanner->make_token();
+
+	}
 	
-	// COMMENT OUT TO TEST...
-	//public function send_message($message, $token_array) {}
+	public function get_scanner()/*:Scanner*/ {}
 	
-	// UNCOMMENT OUT TO TEST...
-	public function send_message($message) {}	
+	public function get_ast()/*:AST*/ {}
 	
-	abstract public function get_scanner();
+	public function get_symb_tab()/*:Symbol_Table*/ {}
 	
-	abstract public function get_int_rep();
-	
-	abstract public function get_symb_tab();
-	
-	abstract public function parse();
+	abstract public function parse()/*:void*/;
+
 }

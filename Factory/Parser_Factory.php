@@ -9,6 +9,7 @@ namespace Factory;
 
 use Parser\My_Language_Parser as My_Language_Parser;
 use Scanner\My_Language_Scanner as My_Language_Scanner;
+use Message\Message_Handler as Message_Handler;
 use Source\File_Source as File_Source;
 use Source\String_Source as String_Source;
 
@@ -41,9 +42,11 @@ class Parser_Factory {
 				
 				// Create a my_language_scanner object
 				$scanner = new My_Language_Scanner($source, $config);
+
+				$message_handler = new Message_Handler();
 				
 				// Create a my_language_parser object, pass in the file source object and the my_language_scanner object and return
-				return new My_Language_Parser($scanner, $config);
+				return new My_Language_Parser($scanner, $message_handler, $config);
 				
 			// string source
 			} else if(is_string($source)) { //more to do here, currently only supporting files due to recent changes/improvements

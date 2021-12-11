@@ -21,7 +21,7 @@ class Message_Handler {
 	
 	public function remove_listener($listener) {
 		
-		$this->listeners = $this->listeners;
+		// stubbed
 		
 	}
 	
