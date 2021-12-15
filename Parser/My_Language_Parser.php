@@ -41,7 +41,7 @@ class My_Language_Parser extends Parser {
 
 				$name = $token->get_value();
 				
-				$table = $this->get_symb_tab();
+				$table = $this->get_symbol_table_stack();
 
 				$entry = $table->lookup_local($name);
 
@@ -54,6 +54,12 @@ class My_Language_Parser extends Parser {
 				$line_number = $token->get_line_number();
 
 				$entry->append_line_number($line_number);
+
+		/*		
+				echo "<pre>";
+				var_dump($entry);
+				die;
+*/
 
 			}
 

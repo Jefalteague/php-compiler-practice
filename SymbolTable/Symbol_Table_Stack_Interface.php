@@ -53,6 +53,6 @@ interface Symbol_Table_Stack_Interface {
 	 *
 	 * @return Symbol_Table
 	 */
-	public function get_local_symbtab():Symbol_Table;
+	public function get_local_symbol_table():Symbol_Table;
 
 }

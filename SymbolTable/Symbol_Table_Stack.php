@@ -37,7 +37,7 @@ class Symbol_Table_Stack implements Symbol_Table_Stack_Interface {
 
 		$this->nesting_level = 0;
 
-		$this->stack[] = Symbol_Table_Factory::create_table($this->nesting_level);
+		array_push($this->stack, Symbol_Table_Factory::create_table($this->nesting_level));
 
 	}
 		
@@ -116,9 +116,11 @@ class Symbol_Table_Stack implements Symbol_Table_Stack_Interface {
 	 *
 	 * @return Symbol_Table
 	 */
-	public function get_local_symbtab():Symbol_Table {
+	public function get_local_symbol_table():Symbol_Table {
 
 		$table = $this->stack[$this->nesting_level];
+
+		return $table;
 
 	}
 

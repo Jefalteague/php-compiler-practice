@@ -47,7 +47,7 @@ class Symbol_Table implements Symbol_Table_Interface {
 
 		$entry = Symbol_Table_Factory::create_entry($name, $this);
 
-		$entries[$name] = $entry;
+		array_push($this->entries, [$name => $entry]);
 
 		return $entry;
 
@@ -71,9 +71,8 @@ class Symbol_Table implements Symbol_Table_Interface {
 
 	public function list():Array {
 
-
+		return $this->entries;
 
 	}
-
 
 }

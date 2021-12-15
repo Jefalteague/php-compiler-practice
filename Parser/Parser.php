@@ -86,7 +86,7 @@ abstract class Parser implements Message_Maker {
 
 	}
 	
-	public function get_symb_tab():Symbol_Table_Stack {
+	public function get_symbol_table_stack():Symbol_Table_Stack {
 
 		return $this->symbol_table_stack;
 

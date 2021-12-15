@@ -21,6 +21,8 @@ return [
 	// boolean (TRUE or FALSE)
 	// to turn on and off parser messaging
 	'messaging' => TRUE,
+
+	'xref' => FALSE,
 	
 	// general tokens
 	'tokens' => [
