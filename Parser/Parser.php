@@ -1,19 +1,20 @@
 <?php
 
-/*
-** The abstract Parser class
-**
-*/
-
 namespace Parser;
 
 use Token\Token2;
+use Message\Message;
+use SymbolTable\Symbol_Table;
 use Scanner\Scanner as Scanner;
+use SymbolTable\Symbol_Table_Stack;
+use SymbolTable\Symbol_Table_Factory;
 use Message\Message_Maker as Message_Maker;
 use Message\Message_Handler as Message_Handler;
-use Message\Parser_Listener as Parser_Listener;
 use Message\Message_Listener as Message_Listener;
-use Scanner\My_Language_Scanner as My_Language_Scanner;
+
+/**
+ * Parser
+ */
 
 abstract class Parser implements Message_Maker {
 	
@@ -23,7 +24,7 @@ abstract class Parser implements Message_Maker {
 	*/
 	
 	protected $ast;
-	protected $symb_tab;
+	protected $symbol_table_stack;
 	protected $scanner;
 	protected $message_handler;
 	public $config;
@@ -36,7 +37,7 @@ abstract class Parser implements Message_Maker {
 	public function __construct(Scanner $scanner, Message_Handler $message_handler, $config) {
 		
 		$this->ast = NULL;
-		$this->symb_tab = NULL;
+		$this->symbol_table_stack = Symbol_Table_Factory::create_stack();
 		$this->scanner = $scanner;
 		$this->message_handler = $message_handler;
 		$this->config = $config;
@@ -55,7 +56,7 @@ abstract class Parser implements Message_Maker {
 
 	}
 
-	public function send_message($message):void {
+	public function send_message(Message $message):void {
 		
 		$this->message_handler->send_message($message);
 		
@@ -66,12 +67,30 @@ abstract class Parser implements Message_Maker {
 		return $this->scanner->make_token();
 
 	}
+
+	public function get_current_token():Token2 {
+
+		return $this->scanner->get_current_token();
+
+	}
 	
-	public function get_scanner()/*:Scanner*/ {}
+	public function get_scanner():Scanner {
+
+		return $this->scanner;
+
+	}
 	
-	public function get_ast()/*:AST*/ {}
+	public function get_ast():AST {
+
+		return $this->AST;
+
+	}
 	
-	public function get_symb_tab()/*:Symbol_Table*/ {}
+	public function get_symb_tab():Symbol_Table_Stack {
+
+		return $this->symbol_table_stack;
+
+	}
 	
 	abstract public function parse()/*:void*/;
 

@@ -1,18 +1,20 @@
 <?php 
 
-/*
-** The abstract class for Tokens
-**
-*/
-
 namespace Token;
 
 use Source as Source;
 
+/**
+ * Token2
+ */
+
 abstract class Token2 {
 	
-	// properties
-	
+	/* Properties
+	**
+	**
+	*/
+
 	//need to change these to protected
 	public $text; // the char associated with the token
 	public $type; // the token's type
@@ -21,7 +23,10 @@ abstract class Token2 {
 	public $line_number; // the token's line number
 	public $column_number; // the token's position in the line
 	
-	// methods
+	/* Methods 
+	**
+	**
+	*/
 	
 	public function __construct($source) {
 

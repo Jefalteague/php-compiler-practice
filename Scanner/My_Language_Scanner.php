@@ -1,42 +1,51 @@
 <?php
 
-/* A specific implementation of
-** the Scanner class. For my tinkering.
-*/
-
 namespace Scanner;
 
-use Scanner\Scanner as Scanner;
-use Source\Source as Source;
-//use Token\Gen_Token as Gen_Token;
-// delete when new classes function correctly
-// COMMENT OUT TO TEST...
-//use Token\EOF_Token as EOF_Token;
-//use Token\EOL_Token as EOL_Token;
-// add new tokens...
-// UNCOMMENT OUT TO TEST...
- use Token\EOF_Token2 as EOF_Token2;
- use Token\EOL_Token2 as EOL_Token2;
- use Token\Word_Token2 as Word_Token2;
-//use Token\Keyword_Token as Keyword_Token;
-//use Token\Special_Symbol_Token as Special_Symbol_Token;
-use Token\Special_Symbol_Token2 as Special_Symbol_Token2;
-// COMMENT OUT TO TEST...
-//use Token\ID_Token as ID_Token;
-// COMMENT OUT TO TEST...
-//use Token\Number_Token as Number_Token;
-use Token\Number_Token2 as NUmber_Token2;
-use Token\Assignment_Token as Assignment_Token;
-use Token\Error_Token as Error_Token;
+//use Scanner\Scanner as Scanner;
+//use Token\Assignment_Token as Assignment_Token;
+//use Token\Error_Token as Error_Token;
 
+use Source\Source as Source;
+use Token\EOF_Token2 as EOF_Token2;
+use Token\EOL_Token2 as EOL_Token2;
+use Token\Word_Token2 as Word_Token2;
+use Token\Special_Symbol_Token2 as Special_Symbol_Token2;
+use Token\Number_Token2 as NUmber_Token2;
+
+/**
+ * My_Language_Scanner
+ */
 class My_Language_Scanner extends Scanner {
+
+	/*Properties
+	**
+	**
+	*/
+
+	/*Methods
+	**
+	**
+	*/
 	
+	/**
+	 * Method __construct
+	 *
+	 * @param Source $source [explicite description]
+	 *
+	 * @return void
+	 */
 	public function __construct(Source $source) {
 		
 		$this->source = $source;
 
 	}
-
+	
+	/**
+	 * Method skip_white_space
+	 *
+	 * @return void
+	 */
 	public function skip_white_space() {
 		
 		$this->current_char = $this->select_char();
@@ -56,7 +65,7 @@ class My_Language_Scanner extends Scanner {
 					$this->current_char = $this->make_char();
 
 				} else {
-				// need proper exception handling
+
 				echo "ERROR: missing '}' " . "line number: " . $this->source->line_number- 1 . " column number: " . $this->source->current_pos -1 ; //make helpers to keep protected properties in source
 					
 					die;
@@ -71,25 +80,12 @@ class My_Language_Scanner extends Scanner {
 		}
 		
 	}
-
-	/* Moved to Parent
-	** Helper function to use with identifier(), which uses make_char() and leaves the current_char and current_pos set
-	** which is then overwritten by select_char() when called by next round of parser. set_back() allows the overwrite to
-	** be done correctly, by setting current_pos and current_char one back. kind of hacky.
-	*/
-	/*
-	public function set_back() {
-		
-		$this->current_char = $this->source->set_back();
-		
-	}
-	*/
-	/*
-	** Method to use in the make_token() method. Creates the ID and Reserved Words Tokens.
-	**
-	** @return object Keyword_Token || ID_Token
-	*/
 	
+	/**
+	 * Method identifier
+	 *
+	 * @return void
+	 */
 	public function identifier() {
 		
 		$value = '';
@@ -128,13 +124,12 @@ class My_Language_Scanner extends Scanner {
 		return $token;
 		
 	}
-	
-	/*
-	** Method to create a special symbol token.
-	**
-	** @return object Special_Symbol_Token
-	*/
-	
+		
+	/**
+	 * Method single_char_token
+	 *
+	 * @return void
+	 */
 	public function single_char_token() {
 		
 		$value = $this->current_char;
@@ -151,12 +146,11 @@ class My_Language_Scanner extends Scanner {
 		
 	}
 	
-	/*
-	** Method to create and return number token.
-	** Handles integer and floats, depending upon input.
-	**
-	** @return object Number_Token
-	*/
+	/**
+	 * Method number
+	 *
+	 * @return void
+	 */
 	
 	public function number() {
 
@@ -207,19 +201,23 @@ class My_Language_Scanner extends Scanner {
 		return new Number_Token($message, $value, $source);
 
 	}
-	
+		
+	/**
+	 * Method peek_char
+	 *
+	 * @return void
+	 */
 	public function peek_char() {
 		
 		return $this->source->peek_char();
 		
 	}
-
-	/*
-	** Method to create the various tokens to return to the parser.
-	**
-	** @return object *_Token
-	*/
-
+	
+	/**
+	 * Method make_token
+	 *
+	 * @return void
+	 */
 	public function make_token() {
 		
 		$this->skip_white_space();
@@ -229,104 +227,33 @@ class My_Language_Scanner extends Scanner {
 		if ($this->current_char == $this->source->config['tokens']['EOF']) {
 			
 			$source= $this->source;
-			
-			// DESCRIPTION OF MOD: remove when new classes function correctly
-			
-			// COMMENT OUT TO TEST
-			//$value = $this->current_char;
-			
-			// DESCRIPTION OF MOD: move all logic into strategized subclasses of My_Language_Token
-			// return new EOF token
-			
-			// UNCOMMENT OUT TO TEST...
+
 			 return new EOF_Token2($source);
-			
-			// COMMENT OUT TO TEST...
-			//return new EOF_Token($message = 'This is a EOF Token.', $value, $source);
 
 		} else if($this->current_char == $this->source->config['tokens']['EOL']) {
 			
 			$source= $this->source;
 			
-			// DESCRIPTION OF MOD: remove when new classes function correctly
-			
-			// COMMENT OUT TO TEST
-			//$value = $this->current_char;
-			
-			// DESCRIPTION OF MOD: move all logic into strategized subclasses of My_Language_Token
-			// return new EOL token
-			
-			
-			// UNCOMMENT OUT TO TEST...
 			return new EOL_Token2($source);
-			
-			// COMMENT OUT TO TEST...			
-			//return new EOL_Token($message = 'This is a EOL Token.', $value, $source);
-			
-		} else if(ctype_alpha($this->current_char)) {
-			
-			// DESCRIPTION OF MOD: move all logic into strategized subclasses of My_Language_Token
-			// add $source
-			// return new Word token
-			
-			// UNCOMMENT OUT TO TEST...
-			$source = $this->source;
-			
-			// UNCOMMENT OUT TO TEST...
-			return new Word_Token2($source);
-			
-			// COMMENT OUT TO TEST...
-			//return $this->identifier();
-			
-		} else if(ctype_digit($this->current_char)) {
-			
-			// DESCRIPTION OF MOD: move all logic into strategized subclasses of My_Language_Token
-			// add $source
-			// return new Number token
-			
-			// UNCOMMENT OUT TO TEST...
-			$source = $this->source;
-			
-			// UNCOMMENT OUT TO TEST...
-			return new Number_Token2($source);
-			
-			// COMMENT OUT TO TEST...
-			//return $this->number(); 
-			
-	//	} else if($this->current_char == ':' && $this->peek_char() == '=') {
 
-		//	$message = 'This is an Assignment Token.';
-			
-		//	$value = $this->source->config['tokens']['ASSIGN'];
-			
-		//	$source = $this->source;
-			
-		//	$this->make_char();
-			
-		//	return new Assignment_Token($message, $value, $source);
-			
+		} else if(ctype_alpha($this->current_char)) {
+
+			$source = $this->source;
+
+			return new Word_Token2($source);
+
+		} else if(ctype_digit($this->current_char)) {
+
+			$source = $this->source;
+
+			return new Number_Token2($source);
+
 		} else if((array_search($this->current_char, $this->source->config['single-char-tokens'], true))
 			
 			|| (array_search($this->current_char . $this->peek_char(), $this->source->config['tokens']))) {
 			
-			// DESCRIPTION OF MOD: move all logic into strategized subclasse of My_Language_Token
-			// add $source
-			// return new Special_Symbol_Token2
-			
-			// COMMENT OUT TO TEST...
-			//return $this->single_char_token();
-/*
-			var_dump($this->current_char);
-			die;
-			*/
-			// UNCOMMENT OUT TO TEST...
 			$source = $this->source;
 
-			//var_dump($this->current_char);
-			//var_dump($this->source->config['single-char-tokens']);
-		
-			//die;
-			// UNCOMMENT OUT TO TEST...
 			return new Special_Symbol_Token2($source);
 			
 		} else {
@@ -334,16 +261,7 @@ class My_Language_Scanner extends Scanner {
 			$source = $this->source;
 			
 			return new Error_Token($source);
-				
-		/* removed to work with error token...don't need it
-			$message = 'This is a GENERAL Token.';
-			
-			$source= $this->source;
-			
-			$value = $this->current_char;
-			
-			return new Gen_Token($message, $value, $source);
-*/
+
 		}
 
 	}

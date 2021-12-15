@@ -1,8 +1,10 @@
 <?php
 
-
 namespace Scanner;
 
+/**
+ * Make_Line
+ */
 class Make_Line {
 	
 	// properties

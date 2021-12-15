@@ -1,29 +1,24 @@
 <?php
 
-/*
-** The My_Language_Parser version of the parser
-**
-*/
-
 namespace Parser;
 
-use Error\My_Language_Error_Handler as My_Language_Error_Handler;
-use Parser\Parser as Parser;
-use Scanner\My_Language_Scanner as My_Language_Scanner;
-// remove when solution found
-// COMMENT OUT TO TEST...
-//use Token\EOF_Token as EOF_Token;
-use Token\EOL_Token as EOL_Token;
-// add new tokens...
-// UNCOMMENT OUT TO TEST...
- use Token\EOF_Token2 as EOF_Token2;
-// use Token\EOL_Token2 as EOL_Token2;
-use Message\Message_Handler as Message_Handler;
-use Message\Message_Listener as Message_Listener;
 use Message\Message as Message;
-use Error\Custom_Exception as Custom_Exception;
+
+/**
+ * My_Language_Parser
+ */
 
 class My_Language_Parser extends Parser {
+
+	/* Properties
+	**
+	**
+	*/
+
+	/* Methods 
+	**
+	**
+	*/
 	
 	public function __construct($scanner, $message_handler, $config) {
 		
@@ -32,7 +27,7 @@ class My_Language_Parser extends Parser {
 	}
 
 	public function parse() {
-			
+
 		$token_array = array();
 		$error_array = array();
 
@@ -41,6 +36,26 @@ class My_Language_Parser extends Parser {
 		while (!(is_a($token, 'Token\EOF_Token2'))) {
 	
 			$token = $this->make_token();
+
+			if($token->get_type() == 'IDENTIFIER') {
+
+				$name = $token->get_value();
+				
+				$table = $this->get_symb_tab();
+
+				$entry = $table->lookup_local($name);
+
+				if($entry == NULL) {
+
+					$entry = $table->enter_local($name);
+
+				}
+
+				$line_number = $token->get_line_number();
+
+				$entry->append_line_number($line_number);
+
+			}
 
 			// add non-error tokens to the token_array, which will be used to message out
 			if($token->get_type() != 'ERROR') {
