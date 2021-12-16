@@ -2,8 +2,6 @@
 
 namespace SymbolTable;
 
-use SymbolTable\Symbol_Table_Interface;
-
 class Symbol_Table implements Symbol_Table_Interface {
 
 	/*Properties
@@ -16,33 +14,52 @@ class Symbol_Table implements Symbol_Table_Interface {
 	 *
 	 * @var array for now
 	 */
-	private $entries = array();
+	private array $entries = array();
 	
 	/**
 	 * nesting_level
 	 *
-	 * @var mixed
+	 * @var int
 	 */
-	private $nesting_level;
+	private int $nesting_level;
 
 	/*Methods
 	**
 	**
 	*/
-
+	
+	/**
+	 * Method __construct
+	 *
+	 * @param int $nesting_level [the scope level for the table]
+	 *
+	 * @return void
+	 */
 	public function __construct(int $nesting_level) {
 
 		$this->nesting_level = $nesting_level;
 
 	}
 
-	
+		
+	/**
+	 * Method get_nesting_level
+	 *
+	 * @return int
+	 */
 	public function get_nesting_level():int {
 
 		return $this->nesting_level;
 
 	}
-
+	
+	/**
+	 * Method enter
+	 *
+	 * @param string $name [the name of the identifier]
+	 *
+	 * @return Symbol_Table_Entry
+	 */
 	public function enter(string $name):Symbol_Table_Entry {
 
 		$entry = Symbol_Table_Factory::create_entry($name, $this);
@@ -52,10 +69,15 @@ class Symbol_Table implements Symbol_Table_Interface {
 		return $entry;
 
 	}
-
+	
+	/**
+	 * Method lookup
+	 *
+	 * @param string $name [the name of the identifier]
+	 *
+	 * @return Symbol_Table_Entry
+	 */
 	public function lookup(string $name):Symbol_Table_Entry|NULL {
-
-		//$entry = $this->entries[$name];
 
 		if(array_search($name, $this->entries)) {
 
@@ -68,7 +90,12 @@ class Symbol_Table implements Symbol_Table_Interface {
 		}
 
 	}
-
+	
+	/**
+	 * Method list
+	 *
+	 * @return Array
+	 */
 	public function list():Array {
 
 		return $this->entries;

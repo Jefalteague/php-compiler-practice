@@ -41,13 +41,13 @@ class My_Language_Parser extends Parser {
 
 				$name = $token->get_value();
 				
-				$table = $this->get_symbol_table_stack();
+				$stack = $this->get_symbol_table_stack();
 
-				$entry = $table->lookup_local($name);
+				$entry = $stack->lookup_local($name);
 
 				if($entry == NULL) {
 
-					$entry = $table->enter_local($name);
+					$entry = $stack->enter_local($name);
 
 				}
 

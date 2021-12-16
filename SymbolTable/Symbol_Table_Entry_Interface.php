@@ -28,8 +28,12 @@ interface Symbol_Table_Entry_Interface {
 	 */
 	public function get_symbol_table():Symbol_Table;
 
+
 	/**
-	 * Method set_atribute
+	 * Method set_attribute
+	 *
+	 * @param $key $key [the key to the entry]
+	 * @param $value $value [the value of the entry]
 	 *
 	 * @return void
 	 */
@@ -38,9 +42,11 @@ interface Symbol_Table_Entry_Interface {
 	/**
 	 * Method get_attribute
 	 *
+	 * @param $key $key [the key to the entry]
+	 *
 	 * @return void
 	 */
-	public function get_attribute($key)/*:return type?*/;
+	public function get_attribute($key);
 	
 	/**
 	 * Method append_line_number

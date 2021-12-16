@@ -2,13 +2,13 @@ PROGRAM firstprogram
 
 	VAR{comment}
 	
-		a, b, c: INTEGER;
+		alpha, beta, cya: INTEGER;
 		
-	PROCEDURE (d: REAL)
+	PROCEDURE (dater: REAL)
 		
 		BEGIN
 		
-			e := 22.2345;
+			elephantgator := 22.2345;
 		
 		END
 		

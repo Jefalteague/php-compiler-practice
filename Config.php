@@ -22,7 +22,7 @@ return [
 	// to turn on and off parser messaging
 	'messaging' => TRUE,
 
-	'xref' => FALSE,
+	'xref' => TRUE,
 	
 	// general tokens
 	'tokens' => [

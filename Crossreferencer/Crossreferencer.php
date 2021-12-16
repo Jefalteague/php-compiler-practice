@@ -24,7 +24,7 @@ class Crossreferencer {
 		
 			foreach($item as $i) {
 
-				$this->header($i);
+				//$this->header($i);
 		
 				echo "<pre>";
 				echo $i->get_entry_name();

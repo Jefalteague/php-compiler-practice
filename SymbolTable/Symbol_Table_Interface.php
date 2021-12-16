@@ -2,8 +2,6 @@
 
 namespace SymbolTable;
 
-use SymbolTable\Symbol_Table_Entry;
-
 interface Symbol_Table_Interface {
 
 	/*Properties
@@ -23,8 +21,11 @@ interface Symbol_Table_Interface {
 	 */
 	public function get_nesting_level():int;
 
+	
 	/**
 	 * Method enter
+	 *
+	 * @param string $name [the name of the identifier]
 	 *
 	 * @return Symbol_Table_Entry
 	 */
@@ -32,6 +33,8 @@ interface Symbol_Table_Interface {
 
 	/**
 	 * Method lookup
+	 *
+	 * @param string $name [the name of the identifier]
 	 *
 	 * @return Symbol_Table_Entry
 	 */

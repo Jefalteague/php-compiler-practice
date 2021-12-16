@@ -2,11 +2,6 @@
 
 namespace SymbolTable;
 
-use SymbolTable\Symbol_Table;
-use SymbolTable\Symbol_Table_Entry;
-use SymbolTable\Symbol_Table_Factory;
-use SymbolTable\Symbol_Table_Stack_Interface;
-
 class Symbol_Table_Stack implements Symbol_Table_Stack_Interface {
 
 	/*Properties
@@ -17,16 +12,16 @@ class Symbol_Table_Stack implements Symbol_Table_Stack_Interface {
 	/**
 	 * stack
 	 *
-	 * @var array for now
+	 * @var array for now?
 	 */
-	private $stack = array();
+	private array $stack = array();
 	
 	/**
 	 * nesting_level
 	 *
 	 * @var mixed
 	 */
-	private $nesting_level;
+	private int $nesting_level;
 
 	/*Methods
 	**
@@ -55,7 +50,7 @@ class Symbol_Table_Stack implements Symbol_Table_Stack_Interface {
 	/**
 	 * Method enter_local
 	 *
-	 * @param $name $name [explicit description]
+	 * @param $name $name [the name of the identifier]
 	 *
 	 * @return Symbol_Table_Entry
 	 */
@@ -72,7 +67,7 @@ class Symbol_Table_Stack implements Symbol_Table_Stack_Interface {
 	/**
 	 * Method lookup_local
 	 *
-	 * @param $name $name [explicit description]
+	 * @param $name $name [the name of the identifier]
 	 *
 	 * @return Symbol_Table_Entry
 	 */
@@ -92,13 +87,12 @@ class Symbol_Table_Stack implements Symbol_Table_Stack_Interface {
 
 		}
 
-
 	}
 	
 	/**
 	 * Method lookup
 	 *
-	 * @param $name $name [explicite description]
+	 * @param $name $name [the name of the identifier]
 	 *
 	 * for now only capable of returning lookup_local()
 	 * @return Symbol_Table_Entry
@@ -107,7 +101,15 @@ class Symbol_Table_Stack implements Symbol_Table_Stack_Interface {
 
 		$entry = $this->lookup_local($name);
 
-		return $entry;
+		if($entry) {
+
+			return $entry;
+
+		} else {
+
+			return NULL;
+
+		}
 
 	}
 

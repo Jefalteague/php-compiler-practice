@@ -27,7 +27,7 @@ interface Symbol_Table_Stack_Interface {
 	 * @param $name $name [explicit description]
 	 *
 	 * @return Symbol_Table_Entry
-	 */
+	 */	
 	public function lookup_local($name):Symbol_Table_Entry|NULL;
 	
 	/**

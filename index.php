@@ -32,7 +32,7 @@ $init = Autoloader::init($auto_dirs);
 $parser_factory = new Parser_Factory();
 
 // Use the factory to get started
-$parser = $parser_factory->create_parser($config['language'], 'jeffrey2.txt', $config);
+$parser = $parser_factory->create_parser($config['language'], 'jeffrey.txt', $config);
 
 // Create the necessary listener for the messages
 $parser_listener = new Parser_Listener();

@@ -14,37 +14,37 @@ class Symbol_Table_Entry implements Symbol_Table_Entry_Interface {
 	/**
 	 * name
 	 *
-	 * @var mixed
+	 * @var string
 	 */
 	private $name;	
 
 	/**
 	 * symbol_table
 	 *
-	 * @var mixed
+	 * @var Symbol_Table
 	 */
 	private $symbol_table;
 
 	/**
 	 * line_numbers
 	 *
-	 * @var mixed
+	 * @var array
 	 */
-	private $line_numbers = array();
+	private array $line_numbers = array();
 	
 	/**
 	 * attributes
 	 *
 	 * @var array
 	 */
-	private $attributes = array();
+	private array $attributes = array();
 
 	/*Methods
 	**
 	**
 	*/
 
-	public function __construct($name, $symbol_table) {
+	public function __construct(string $name, Symbol_Table $symbol_table) {
 
 		$this->name = $name;
 
@@ -75,7 +75,10 @@ class Symbol_Table_Entry implements Symbol_Table_Entry_Interface {
 	}
 
 	/**
-	 * Method set_atribute
+	 * Method set_attribute
+	 *
+	 * @param $key $key [the key to the attributes array]
+	 * @param $value $value [the value to put in the attributes array]
 	 *
 	 * @return void
 	 */
@@ -88,9 +91,11 @@ class Symbol_Table_Entry implements Symbol_Table_Entry_Interface {
 	/**
 	 * Method get_attribute
 	 *
+	 * @param $key $key [the key to the attributes array]
+	 *
 	 * @return void
 	 */
-	public function get_attribute($key)/*:return type?*/ {
+	public function get_attribute($key) {
 
 		$attribute = $this->attributes[$key];
 
@@ -101,11 +106,13 @@ class Symbol_Table_Entry implements Symbol_Table_Entry_Interface {
 	/**
 	 * Method append_line_number
 	 *
+	 * @param $line_number $line_number [the line number of the identifier]
+	 *
 	 * @return void
 	 */
-	public function append_line_number($line_numbers):void {
+	public function append_line_number($line_number):void {
 
-		$this->line_numbers[] = $line_numbers;
+		$this->line_numbers[] = $line_number;
 
 	}
 
