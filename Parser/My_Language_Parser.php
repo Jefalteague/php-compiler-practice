@@ -32,9 +32,9 @@ class My_Language_Parser extends Parser {
 		$error_array = array();
 
 		$token = NULL;
-
+		$start_time = (float)microtime();
 		while (!(is_a($token, 'Token\EOF_Token2'))) {
-	
+			
 			$token = $this->make_token();
 
 			if($token->get_type() == 'IDENTIFIER') {
@@ -93,7 +93,11 @@ class My_Language_Parser extends Parser {
 			}
 			
 		}
-		
+
+		$end_time = (float)microtime();
+
+		$time_dif = $end_time - $start_time;
+
 		// verbose config to turn on and off message sending
 		if($this->config['messaging'] == TRUE) {
 			
@@ -111,6 +115,8 @@ class My_Language_Parser extends Parser {
 				// when php enums are available Nov 25th, switch to that approach, rather than the config associative array
 				if(in_array('TOKEN', $this->config['message_type'])) {$type = 'TOKEN';}
 
+				echo "Elapsed Time: " . $time_dif . " seconds";
+		
 				$message = New Message($type, $token_array);
 
 				$this->send_message($message);

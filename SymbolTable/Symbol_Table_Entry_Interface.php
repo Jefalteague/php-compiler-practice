@@ -32,28 +32,30 @@ interface Symbol_Table_Entry_Interface {
 	/**
 	 * Method set_attribute
 	 *
-	 * @param $key $key [the key to the entry]
-	 * @param $value $value [the value of the entry]
+	 * @param Symbol_Table_Key $key [the key to the attribute]
+	 * @param $value $value [the value of the attribute]
 	 *
 	 * @return void
 	 */
-	public function set_attribute($key, $value):void;
+	public function set_attribute(Symbol_Table_Key $key, $value):void;
 	
 	/**
 	 * Method get_attribute
 	 *
-	 * @param $key $key [the key to the entry]
+	 * @param Symbol_Table_Key $key [the key to the attribute]
 	 *
 	 * @return void
 	 */
-	public function get_attribute($key);
+	public function get_attribute(Symbol_Table_Key $key);
 	
 	/**
 	 * Method append_line_number
 	 *
+	 * @param int $line_number [the line number of the identifier]
+	 *
 	 * @return void
 	 */
-	public function append_line_number($line_number):void;
+	public function append_line_number(int $line_number):void;
 
 	/**
 	 * Method get_line_numbers

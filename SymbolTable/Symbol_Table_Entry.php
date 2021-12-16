@@ -77,12 +77,12 @@ class Symbol_Table_Entry implements Symbol_Table_Entry_Interface {
 	/**
 	 * Method set_attribute
 	 *
-	 * @param $key $key [the key to the attributes array]
-	 * @param $value $value [the value to put in the attributes array]
+	 * @param Symbol_Table_Key $key [the key to the attribute]
+	 * @param $value $value [explicite description]
 	 *
 	 * @return void
 	 */
-	public function set_attribute($key, $value):void {
+	public function set_attribute(Symbol_Table_Key $key, $value):void {
 
 		$attribute = $this->attributes[$key] = $value;
 
@@ -91,11 +91,11 @@ class Symbol_Table_Entry implements Symbol_Table_Entry_Interface {
 	/**
 	 * Method get_attribute
 	 *
-	 * @param $key $key [the key to the attributes array]
+	 * @param Symbol_Table_Key $key [the key to the attribute]
 	 *
 	 * @return void
 	 */
-	public function get_attribute($key) {
+	public function get_attribute(Symbol_Table_Key $key) {
 
 		$attribute = $this->attributes[$key];
 
@@ -106,11 +106,11 @@ class Symbol_Table_Entry implements Symbol_Table_Entry_Interface {
 	/**
 	 * Method append_line_number
 	 *
-	 * @param $line_number $line_number [the line number of the identifier]
+	 * @param int $line_number [the line number of the identifier]
 	 *
 	 * @return void
 	 */
-	public function append_line_number($line_number):void {
+	public function append_line_number(int $line_number):void {
 
 		$this->line_numbers[] = $line_number;
 
