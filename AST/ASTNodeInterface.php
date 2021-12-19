@@ -2,6 +2,8 @@
 
 namespace AST;
 
+use AST\ASTNodeTypeEnum;
+
 interface ASTNodeInterface {
 
 	/*Properties
@@ -17,9 +19,9 @@ interface ASTNodeInterface {
 	/**
 	 * Method get_type
 	 *
-	 * @return ASTNodeType
+	 * @return ASTNodeTypeEnum
 	 */
-	public function get_type():ASTNodeType;
+	public function get_type():ASTNodeTypeEnum;
 	
 	/**
 	 * Method add_child_node
