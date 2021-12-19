@@ -55,7 +55,7 @@ class ASTNode implements ASTNodeInterface {
 	 *
 	 * @return void
 	 */
-	protected function set_parent(ASTNode $parent) {
+	public function set_parent(ASTNode $parent):void {
 
 		$this->parent = $parent;
 
@@ -120,7 +120,7 @@ class ASTNode implements ASTNodeInterface {
 	 *
 	 * @return void
 	 */
-	public function set_attribute(ASTNodeKey $key, Object $value) {
+	public function set_attribute(ASTNodeKey $key, Object $value):void {
 
 		array_push($this->attributes[$key], $value);
 

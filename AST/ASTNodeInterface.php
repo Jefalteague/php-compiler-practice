@@ -58,14 +58,14 @@ interface ASTNodeInterface {
 	 *
 	 * @return void
 	 */
-	public function set_attribute();
+	public function set_attribute(ASTNodeKey $key, Object $value):void;
 	
 	/**
 	 * Method get_attribute
 	 *
 	 * @return Object
 	 */
-	public function get_attribute():Object;
+	public function get_attribute(ASTNodeKey $key):Object;
 
 	/**
 	 * Method copy
