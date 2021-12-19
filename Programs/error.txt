@@ -1,0 +1,7 @@
+Program
+
+Begin
+
+    a = 23
+
+End.   

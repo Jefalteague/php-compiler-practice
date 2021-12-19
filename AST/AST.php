@@ -20,16 +20,28 @@ class AST implements ASTInterface {
 	**
 	**
 	*/
-
-	public function set_root(ASTNode $node) {
+	
+	/**
+	 * Method set_root
+	 *
+	 * @param ASTNode $node [explicite description]
+	 *
+	 * @return ASTNode
+	 */
+	public function set_root(ASTNode $node):ASTNode {
 
 		$this->root = $node;
 
 		return $this->root;
 
 	}
-
-	public function get_root() {
+	
+	/**
+	 * Method get_root
+	 *
+	 * @return ASTNode
+	 */
+	public function get_root():ASTNode {
 
 		return $this->root;
 

@@ -15,7 +15,14 @@ class Crossreferencer {
 	**
 	**
 	*/
-
+	
+	/**
+	 * Method crossreference
+	 *
+	 * @param Symbol_Table_Stack $stack [explicite description]
+	 *
+	 * @return void
+	 */
 	public function crossreference(Symbol_Table_Stack $stack) {
 
 		$list = $stack->get_local_symbol_table()->list();
@@ -35,7 +42,14 @@ class Crossreferencer {
 		}
 
 	}
-
+	
+	/**
+	 * Method header
+	 *
+	 * @param $i $i [explicite description]
+	 *
+	 * @return void
+	 */
 	public function header($i) {
 
 		//this will be for formatting the output strings

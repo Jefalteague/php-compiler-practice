@@ -119,12 +119,12 @@ class Parser_Listener implements Message_Listener {
 					echo "My_Language Output";
 					echo "<hr style='width:50%;text-align:left;margin-left:0'>"; // echo styled line
 					
-					echo "<br />";
-					echo $type;
-					echo "<br />";
-					
 					foreach($this->message->get_data() as $data) { // loop through the array of arrays
-					
+						
+						echo "<br />";
+						echo $type;
+						echo "<br />";
+
 						foreach($data as $key => $datum) { // loop through the second level of arrays, $x is the key
 							
 							echo "<i>"; // echo block starts
