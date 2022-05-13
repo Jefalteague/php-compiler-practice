@@ -43,7 +43,15 @@ class Symbol_Table_Entry implements Symbol_Table_Entry_Interface {
 	**
 	**
 	*/
-
+	
+	/**
+	 * Method __construct
+	 *
+	 * @param string $name [explicite description]
+	 * @param Symbol_Table $symbol_table [explicite description]
+	 *
+	 * @return void
+	 */
 	public function __construct(string $name, Symbol_Table $symbol_table) {
 
 		$this->name = $name;

@@ -2,12 +2,14 @@
 
 namespace Parser;
 
-use Token\Token2;
-use Message\Message;
-use SymbolTable\Symbol_Table;
+// use Token\Token2;
+// change to use Token\Token\My_Language_Token
+use Token\Token\My_Language_Token;
 use Scanner\Scanner as Scanner;
+use SymbolTable\Symbol_Table;
 use SymbolTable\Symbol_Table_Stack;
 use SymbolTable\Symbol_Table_Factory;
+use Message\Message;
 use Message\Message_Maker as Message_Maker;
 use Message\Message_Handler as Message_Handler;
 use Message\Message_Listener as Message_Listener;
@@ -62,14 +64,14 @@ abstract class Parser implements Message_Maker {
 		
 	}
 
-	public function make_token():Token2 {
-	
+	public function make_token():My_Language_Token/*Token2*/ {
+	// change to return My_Language_Token
 		return $this->scanner->make_token();
 
 	}
 
-	public function get_current_token():Token2 {
-
+	public function get_current_token():My_Language_Token/*Token2*/ {
+	// change to return My_Language_Token
 		return $this->scanner->get_current_token();
 
 	}

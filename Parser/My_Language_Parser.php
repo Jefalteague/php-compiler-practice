@@ -2,7 +2,9 @@
 
 namespace Parser;
 
+use AST\ASTFactory;
 use Message\Message as Message;
+use Error\My_Language_Error_Handler;
 
 /**
  * My_Language_Parser
@@ -28,14 +30,29 @@ class My_Language_Parser extends Parser {
 
 	public function parse() {
 
+		$this->ast = ASTFactory::create_AST();
+
 		$token_array = array();
+
 		$error_array = array();
 
 		$token = NULL;
+
 		$start_time = (float)microtime();
-		while (!(is_a($token, 'Token\EOF_Token2'))) {
-			
+
+		while (!(is_a($token, 'Token\Token\My_Language_EOF_Token'/*'Token\EOF_Token2'*/))) {
+			//change to 'Token\My_Language_EOF_Token'
 			$token = $this->make_token();
+
+			/* Beginning of the AST work
+			if($token->get_value() == 'BEGIN') {
+
+				echo "<pre>";
+				var_dump($token->get_value());
+				die;
+
+			}
+			*/
 
 			if($token->get_type() == 'IDENTIFIER') {
 
@@ -55,17 +72,11 @@ class My_Language_Parser extends Parser {
 
 				$entry->append_line_number($line_number);
 
-		/*		
-				echo "<pre>";
-				var_dump($entry);
-				die;
-*/
-
 			}
 
 			// add non-error tokens to the token_array, which will be used to message out
 			if($token->get_type() != 'ERROR') {
-
+				
 				array_push($token_array, [
 
 					'text' => $token->get_text(),
@@ -83,10 +94,10 @@ class My_Language_Parser extends Parser {
 
 					'type' => $token->type,
 					'file' => $token->source->file,
-					'value' => $token->value,
+					'value' => $token->value->get_type(),
 					'line_number' => $token->line_number,
 					'column_number' => $token->column_number,
-					'choke' => $token->choke,
+					//'choke' => $token->choke,
 				
 				]);
 

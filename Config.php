@@ -49,6 +49,8 @@ return [
 		'INTEGER_DIV' => 'DIV',
 		'VAR' => 'VAR',
 		'END' => 'END',
+		'REPEAT' => 'REPEAT',
+		'UNTIL' => 'UNTIL',
 	
 	],
 	

@@ -9,15 +9,23 @@ namespace Autoloader;
 
 class Autoloader {
 
+	// Dirs is an array which holds the directories in which to search for the files that contain the required classes
 	public static $dirs = array();
+
+	// The variable to use as a flag to enforce singleton instantiation of autoloader
 	public static $singleton;
+
+	// To be a singleton, really, should return the single/same instantiation when another attempt to create a new autoloader is made
+	// As of 03/05/2022 his code will not return the single/same instantiation upon multiple attempts, because it is not stored
 	
+	// The first of two approaches to instantiation, which uses the second approach
 	public function __construct($dirs) {
 		
 		self::init($dirs);
 		
 	}
 	
+	// The second of two approaches to instantiation
 	public static function init($dirs) {
 		
 		if($dirs) { //set the dirs
@@ -86,6 +94,7 @@ class Autoloader {
 				
 			}
 			
+			// There is a better way to do the following
 			if(!$success) {
 				
 				$last_chance = __DIR__ . DIRECTORY_SEPARATOR . $file;

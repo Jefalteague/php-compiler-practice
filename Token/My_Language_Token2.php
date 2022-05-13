@@ -10,5 +10,14 @@ namespace Token;
 
 class My_Language_Token2 extends Token2 {
 
+    /*Properties
+	**
+	**
+	*/
+
+    /*Methods
+	**
+	**
+	*/
 
 }

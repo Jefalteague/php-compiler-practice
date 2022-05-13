@@ -8,6 +8,7 @@
 namespace Source;
 
 use Source\Source as Source;
+use Token\Pascal_Token_Type;
 
 /**
  * File_Source
@@ -51,6 +52,7 @@ class File_Source extends Source {
 
 		$this->file = $file;
 
+		//this will need to go, but for now must stay due to dependencies
 		$this->config = $config;
 
 		// Set the initial cursor position to -2 to account for the select_char() logic
@@ -190,14 +192,14 @@ class File_Source extends Source {
 				
 			} // else error?
 
-			return $this->config['tokens']['EOF'];
+			return Pascal_Token_Type::EOF->not_reserved();
 			
 		// EOL		
 		} else if(($this->current_pos == -1) || ($this->current_pos == strlen($this->line))) {
 
 			$this->current_pos = $this->current_pos + 1;
 			
-			return $this->config['tokens']['EOL'];
+			return Pascal_Token_Type::EOL->not_reserved();
 
 		// read new line
 		} else if($this->current_pos > strlen($this->line)) {
@@ -239,7 +241,7 @@ class File_Source extends Source {
 
 		} else {
 
-			return 'EOL';
+			return Pascal_Token_Type::EOL->not_reserved();
 
 		}
 		

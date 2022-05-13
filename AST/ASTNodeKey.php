@@ -2,16 +2,16 @@
 
 namespace AST;
 
-class ASTNodeKey implements ASTNodeKeyInterface {
+enum ASTNodeKey:string implements ASTNodeKeyInterface {
 
 	/*Properties
 	**
 	**
 	*/
 
-	public const LINE = 'LINE';
-	public const ID = 'ID';
-	public const VALUE = 'VALUE';
+	case LINE = 'LINE';
+	case ID = 'ID';
+	case VALUE = 'VALUE';
 
 	/*Methods
 	**

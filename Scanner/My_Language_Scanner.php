@@ -6,12 +6,29 @@ namespace Scanner;
 //use Token\Assignment_Token as Assignment_Token;
 //use Token\Error_Token as Error_Token;
 
+use Token\Error_Token;
+// change to use Token\My_Language_Error_Token
 use Source\Source as Source;
+use Token\Pascal_Token_Type;
+// rename Pascal_Token_Type to y_Language_Token_Type and change to use it 
+use Error\My_Language_Error_Type;
+// change to use Token\My_Language_EOF_Token
 use Token\EOF_Token2 as EOF_Token2;
+// change to use Token\My_Language_EOL_Token
 use Token\EOL_Token2 as EOL_Token2;
+// change to use Token\My_Language_Word_Token
 use Token\Word_Token2 as Word_Token2;
+// change to use Token\Token\My_Language_Number_Token
+use Token\Token\My_Language_EOF_Token;
+use Token\Token\My_Language_EOL_Token;
+use Token\Token\My_Language_Word_Token;
+use Token\Token\My_Language_Error_Token;
+use Token\Token\My_Language_String_Token;
+use Token\Number_Token2 as Number_Token2;
+use Token\Token\My_Language_Number_Token;
+use Token\Token\My_Language_Special_Symbol_Token;
 use Token\Special_Symbol_Token2 as Special_Symbol_Token2;
-use Token\Number_Token2 as NUmber_Token2;
+// change to use Token\My_Language_Special_Symbol_Token
 
 /**
  * My_Language_Scanner
@@ -54,7 +71,7 @@ class My_Language_Scanner extends Scanner {
 
 			if($this->current_char == "{") {
 				
-				while(($this->current_char != "}") ) {
+				while(($this->current_char != "}" && $this->current_char != "EOF") ) {
 					
 					$this->current_char = $this->make_char();
 
@@ -64,12 +81,6 @@ class My_Language_Scanner extends Scanner {
 
 					$this->current_char = $this->make_char();
 
-				} else {
-
-				echo "ERROR: missing '}' " . "line number: " . $this->source->line_number- 1 . " column number: " . $this->source->current_pos -1 ; //make helpers to keep protected properties in source
-					
-					die;
-					
 				}
 				
 			} else if(ctype_space($this->current_char)) {
@@ -224,29 +235,43 @@ class My_Language_Scanner extends Scanner {
 
 		// the textbook contains the following, but i don't understand why: $this->current_char = $this->select_char();
 
-		if ($this->current_char == $this->source->config['tokens']['EOF']) {
+		if ($this->current_char == Pascal_Token_Type::EOF->not_reserved()) {
 			
-			$source= $this->source;
+			$source = $this->source;
 
-			 return new EOF_Token2($source);
+			//return new EOF_Token2($source);
+			// change to My_Language_EOF_Token($source)
+			return new My_Language_EOF_Token($source);
 
-		} else if($this->current_char == $this->source->config['tokens']['EOL']) {
+		} else if($this->current_char == Pascal_Token_Type::EOL->not_reserved()) {
 			
-			$source= $this->source;
+			$source = $this->source;
 			
-			return new EOL_Token2($source);
+			//return new EOL_Token2($source);
+			// change to My_Language_EOL_Token($source)
+			return new My_Language_EOL_Token($source);
 
 		} else if(ctype_alpha($this->current_char)) {
 
 			$source = $this->source;
 
-			return new Word_Token2($source);
+			//return new Word_Token2($source);
+			// change to My_Language_Word_Token($source)
+			return new My_Language_Word_Token($source);
 
 		} else if(ctype_digit($this->current_char)) {
 
 			$source = $this->source;
+//
+			//return new Number_Token2($source);
+			// change to My_Language_Number_Token($source)
+			return new My_Language_Number_Token($source);
 
-			return new Number_Token2($source);
+		} else if($this->current_char == '\'') {
+
+			$source = $this->source;
+
+			return new My_Language_String_Token($source);
 
 		} else if((array_search($this->current_char, $this->source->config['single-char-tokens'], true))
 			
@@ -254,13 +279,19 @@ class My_Language_Scanner extends Scanner {
 			
 			$source = $this->source;
 
-			return new Special_Symbol_Token2($source);
+			//return new Special_Symbol_Token2($source);
+			// change to My_Language_Special_Symbol_Token($source)
+			return new My_Language_Special_Symbol_Token($source);
 			
 		} else {
 			
 			$source = $this->source;
 			
-			return new Error_Token($source);
+			//return new Error_Token($source);
+			// change to My_Language_Error_Token($source, $error_code, $text)
+
+			//$error_code = My_Language_Error_Type::INVALID_CHARACTER->get_type();
+			return new My_Language_Error_Token($source, My_Language_Error_Type::INVALID_CHARACTER, 'error');
 
 		}
 

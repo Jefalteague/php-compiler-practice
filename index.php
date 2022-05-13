@@ -1,26 +1,16 @@
 <?php
 
-//phpinfo();
-//die;
-
 // Pull in the autoloader file
 require_once('.\Autoloader\Autoloader.php');
 
-// Pull in the config file
-$config = require_once('Config.php');
-
-// Use the autoloader namespace
-use Crossreferencer\Crossreferencer;
-
-// Use the parser factory namespace
 use Autoloader\Autoloader as Autoloader;
-
-// Use the parser listener namespace
 use Factory\Parser_Factory as Parser_Factory;
-
-// Use the parser error listener
 use Message\Parser_Listener as Parser_Listener;
 use Message\Parser_Error_Listener as Parser_Error_Listener;
+use Crossreferencer\Crossreferencer;
+
+// Pull in the config file
+$config = require_once('Config.php');
 
 // Get the dirs for the autoloader from the config file
 $auto_dirs = $config['auto_dirs']['auto_dirs'];
@@ -32,7 +22,7 @@ $init = Autoloader::init($auto_dirs);
 $parser_factory = new Parser_Factory();
 
 // Use the factory to get started
-$parser = $parser_factory->create_parser($config['language'], 'Programs/jeffrey.txt', $config);
+$parser = $parser_factory->create_parser($config['language'], 'Programs/stroffset_problem.txt', $config);
 
 // Create the necessary listener for the messages
 $parser_listener = new Parser_Listener();
