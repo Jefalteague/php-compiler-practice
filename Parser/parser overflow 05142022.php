@@ -1,61 +1,58 @@
-<?php
 
-namespace Parser;
-
-use AST\ASTFactory;
-use Message\Message as Message;
-use Error\My_Language_Error_Handler;
-use Parser\Statement_Parser;
-use Scanner\Scanner as Scanner;
-
-/**
- * My_Language_Parser
- */
-
-class My_Language_Parser extends Parser {
-
-	/* Properties
-	**
-	**
-	*/
-
-	public $ast;
-
-	/* Methods 
-	**
-	**
-	*/
-	
-	public function __construct($scanner, $message_handler, $config) {
+		$this->ast = ASTFactory::create_AST();
 		
-		parent::__construct($scanner, $message_handler, $config);
+		//var_dump($this->ast);
 
-	}
+		$token_array = array();
 
-	public function parse() {
+		$error_array = array();
 
-		try {
-			
-			$this->ast = ASTFactory::create_AST();
+		$token = NULL;
 
-			$token_array = array();
+		$start_time = (float)microtime();
 
-			$error_array = array();
-
-			$token = NULL;
-
-			$start_time = (float)microtime();
-
+		while (!(is_a($token, 'Token\Token\My_Language_EOF_Token'/*'Token\EOF_Token2'*/))) {
+			//change to 'Token\My_Language_EOF_Token'
 			$token = $this->make_token();
 
+			/* Beginning of the AST work*/
 			if($token->get_value() == 'BEGIN') {
 
-				$statement_parser = new Statement_Parser($this);
+				echo "<pre>";
+				//var_dump($token->get_value());
+				//var_dump($this);
 
-				var_dump($statement_parser);
+				$statement_parser = new Statement_Parser($this);
+				
+				//var_dump($statement_parser);
+				//die;
+
+				var_dump($statement_parser->parse());
+				die;
 
 			}
-			
+				
+
+			if($token->get_type() == 'IDENTIFIER') {
+
+				$name = $token->get_value();
+				
+				$stack = $this->get_symbol_table_stack();
+
+				$entry = $stack->lookup_local($name);
+
+				if($entry == NULL) {
+
+					$entry = $stack->enter_local($name);
+
+				}
+
+				$line_number = $token->get_line_number();
+
+				$entry->append_line_number($line_number);
+
+			}
+
 			// add non-error tokens to the token_array, which will be used to message out
 			if($token->get_type() != 'ERROR') {
 				
@@ -84,6 +81,8 @@ class My_Language_Parser extends Parser {
 				]);
 
 			}
+			
+		}
 
 		$end_time = (float)microtime();
 
@@ -113,21 +112,5 @@ class My_Language_Parser extends Parser {
 				$this->send_message($message);
 
 			}
-		
-			}
-
+			
 		}
-		
-		catch (Exception $e) {
-				echo $e;
-			}
-
-	}
-
-	public function get_parent_scanner($parent):Scanner {
-
-		return $parent->get_scanner();
-
-	}
-	
-}

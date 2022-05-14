@@ -1,2 +1,5 @@
-identifier := 1;
-another:= 2;
+	BEGIN
+
+		a := 2.1326;
+
+	END.
