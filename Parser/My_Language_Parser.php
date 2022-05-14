@@ -52,7 +52,9 @@ class My_Language_Parser extends Parser {
 
 				$statement_parser = new Statement_Parser($this);
 
-				var_dump($statement_parser);
+				$node = $statement_parser->parse2($token);
+
+				var_dump($node);
 
 			}
 			

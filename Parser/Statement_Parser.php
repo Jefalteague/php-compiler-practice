@@ -4,6 +4,7 @@ namespace Parser;
 
 use Parser\My_Language_Parser as My_Language_Parser;
 use Parser\Statement_Parser as Statement_Parser;
+use Token\Token as Token;
 
 class Statement_Parser extends My_language_Parser{
 
@@ -23,9 +24,18 @@ class Statement_Parser extends My_language_Parser{
 
 	}
 
-	public function parse() {
+	public function parse2($token) {
 
-		
+		switch ($token->value) {
+
+			case 'BEGIN':
+
+				var_dump($token);
+
+			case 'IDENTIFIER': 
+
+
+		}
 
 	}
 
