@@ -15,6 +15,8 @@ $config = require_once('Config.php');
 // Get the dirs for the autoloader from the config file
 $auto_dirs = $config['auto_dirs']['auto_dirs'];
 
+//var_dump($auto_dirs);
+
 // Use the autoloader
 $init = Autoloader::init($auto_dirs);
 
@@ -22,7 +24,7 @@ $init = Autoloader::init($auto_dirs);
 $parser_factory = new Parser_Factory();
 
 // Use the factory to get started
-$parser = $parser_factory->create_parser($config['language'], 'Programs/jeffrey2.txt', $config);
+$parser = $parser_factory->create_parser($config['language'], 'Programs/eof.txt', $config);
 
 // Create the necessary listener for the messages
 $parser_listener = new Parser_Listener();

@@ -68,6 +68,8 @@ return [
 		'COMMA' => ',',
 		'EQUAL' => '=',
 		'COLON' => ':',
+		'LESS_THAN' => '<',
+		'GREATER_THAN' => '>',
 		// more to come
 	
 	],

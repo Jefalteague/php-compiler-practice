@@ -229,7 +229,7 @@ class My_Language_Scanner extends Scanner {
 	 *
 	 * @return void
 	 */
-	public function make_token() {
+	public function extract_token() {
 		
 		$this->skip_white_space();
 
@@ -262,7 +262,9 @@ class My_Language_Scanner extends Scanner {
 		} else if(ctype_digit($this->current_char)) {
 
 			$source = $this->source;
-//
+
+			//var_dump($source);
+
 			//return new Number_Token2($source);
 			// change to My_Language_Number_Token($source)
 			return new My_Language_Number_Token($source);
@@ -286,6 +288,8 @@ class My_Language_Scanner extends Scanner {
 		} else {
 			
 			$source = $this->source;
+
+			//var_dump($this->current_char);
 			
 			//return new Error_Token($source);
 			// change to My_Language_Error_Token($source, $error_code, $text)

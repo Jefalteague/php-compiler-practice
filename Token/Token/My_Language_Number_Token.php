@@ -45,6 +45,8 @@ class My_Language_Number_Token extends My_Language_Token {
 				$this->value = (float)$value;
 				
 				$this->type = 'FLOAT NUMBER';
+
+				$this->type_value = 'FLOAT NUMBER';
 				
 				return;
 
@@ -59,6 +61,8 @@ class My_Language_Number_Token extends My_Language_Token {
 		$this->value = (int)$value;
 		
 		$this->type = 'INTEGER NUMBER';
+
+		$this->type_value = 'INTEGER_NUMBER';
 
 	}
 

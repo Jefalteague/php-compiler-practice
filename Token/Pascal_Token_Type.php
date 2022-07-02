@@ -60,6 +60,7 @@ enum Pascal_Token_Type:string implements Token_Type_Interface {
 	// Special Symbols
 	case COLON = ':';
 	case COLON_EQUALS = ':=';
+	case SEMI_COLON = ';';
 	case COMMA = ',';
 	case DOT = '.';
 	case DOT_DOT = '..';
@@ -72,12 +73,12 @@ enum Pascal_Token_Type:string implements Token_Type_Interface {
 	case GREATER_EQUALS = '>=';
 	case GREATER_THAN = '>';
 	case MINUS = '-';
+	case NOT_EQUALS = '<>';
 	case PLUS = '+';
 	case QUOTE = '\'';
 	case RIGHT_BRACE = '}';
 	case RIGHT_BRACKET = ']';
 	case RIGHT_PARENTHESES = ')';
-	case SEMI_COLON = ';';
 	case SLASH = '/';
 	case STAR = '*';
 	case UP_ARROW = '^';
@@ -86,12 +87,6 @@ enum Pascal_Token_Type:string implements Token_Type_Interface {
 	**
 	**
 	*/
-
-	public function get_text() {
-
-		return $this->text;
-
-	}
 
 	public function reserved_words() {
 
@@ -156,11 +151,13 @@ enum Pascal_Token_Type:string implements Token_Type_Interface {
 			PASCAL_TOKEN_TYPE::GREATER_EQUALS => '>=',
 			PASCAL_TOKEN_TYPE::GREATER_THAN => '>',
 			PASCAL_TOKEN_TYPE::MINUS => '-',
+			PASCAL_TOKEN_TYPE::NOT_EQUALS => '<>',
 			PASCAL_TOKEN_TYPE::PLUS => '+',
+			PASCAL_TOKEN_TYPE::QUOTE => '\'',
 			PASCAL_TOKEN_TYPE::RIGHT_BRACE => '}',
 			PASCAL_TOKEN_TYPE::RIGHT_BRACKET => ']',
 			PASCAL_TOKEN_TYPE::RIGHT_PARENTHESES => ')',
-			PASCAL_TOKEN_TYPE::SEMI_COLON => ',',
+			PASCAL_TOKEN_TYPE::SEMI_COLON => ';',
 			PASCAL_TOKEN_TYPE::SLASH => '/',
 			PASCAL_TOKEN_TYPE::STAR => '*',
 			PASCAL_TOKEN_TYPE::UP_ARROW => '^',
@@ -172,15 +169,30 @@ enum Pascal_Token_Type:string implements Token_Type_Interface {
 	public function not_reserved() {
 
 		return match($this) {
-		
-		PASCAL_TOKEN_TYPE::IDENTIFIER => 'IDENTIFIER',
-		PASCAL_TOKEN_TYPE::INTEGER => 'INTEGER',
-		PASCAL_TOKEN_TYPE::REAL => 'REAL',
-		PASCAL_TOKEN_TYPE::STRING => 'STRING',
-		PASCAL_TOKEN_TYPE::ERROR => 'ERROR',
-		PASCAL_TOKEN_TYPE::END_OF_FILE => 'END_OF_FILE',
-		PASCAL_TOKEN_TYPE::EOF => 'EOF',
-		PASCAL_TOKEN_TYPE::EOL => 'EOL'
+			
+			PASCAL_TOKEN_TYPE::IDENTIFIER => 'IDENTIFIER',
+			PASCAL_TOKEN_TYPE::INTEGER => 'INTEGER',
+			PASCAL_TOKEN_TYPE::REAL => 'REAL',
+			PASCAL_TOKEN_TYPE::STRING => 'STRING',
+			PASCAL_TOKEN_TYPE::ERROR => 'ERROR',
+			PASCAL_TOKEN_TYPE::END_OF_FILE => 'END_OF_FILE',
+			PASCAL_TOKEN_TYPE::EOF => 'EOF',
+			PASCAL_TOKEN_TYPE::EOL => 'EOL'
+
+		};
+
+	}
+
+	public function rel_ops() {
+
+		return match($this) {
+
+			PASCAL_TOKEN_TYPE::GREATER_THAN => 'GREATER_THAN',
+			PASCAL_TOKEN_TYPE::GREATER_EQUALS => 'GREATER_EQUALS',
+			PASCAL_TOKEN_TYPE::LESS_THAN => 'LESS_THAN',
+			PASCAL_TOKEN_TYPE::LESS_EQUALS => 'LESS_EQUALS',
+			PASCAL_TOKEN_TYPE::EQUALS => 'EQUALS',
+			PASCAL_TOKEN_TYPE::NOT_EQUALS => 'NOT_EQUALS',
 
 		};
 

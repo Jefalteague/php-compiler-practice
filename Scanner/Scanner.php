@@ -15,6 +15,7 @@ abstract class Scanner {
 	*/
 
 	public $source;
+	public $current_token;
 	protected $current_char;
 	protected $line;
 	protected $token;
@@ -29,7 +30,11 @@ abstract class Scanner {
 	 *
 	 * @return void
 	 */
-	public function __construct() {}
+	public function __construct(Source $source) {
+
+		$this->source = $source;
+
+	}
 		
 	/**
 	 * Method get_source
@@ -106,6 +111,22 @@ abstract class Scanner {
 		
 		$this->current_char = $this->source->set_back();
 		
+	}
+
+	public function next_token() {
+
+		$this->current_token = $this->extract_token();
+
+		return $this->current_token;
+
+	}
+
+	abstract public function extract_token();
+
+	public function get_current_token() {
+
+		return $this->current_token;
+
 	}
 
 }

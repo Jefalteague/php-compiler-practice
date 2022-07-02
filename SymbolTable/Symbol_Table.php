@@ -64,7 +64,7 @@ class Symbol_Table implements Symbol_Table_Interface {
 
 		$entry = Symbol_Table_Factory::create_entry($name, $this);
 
-		array_push($this->entries, [$name => $entry]);
+		$this->entries[$name] = $entry;
 
 		return $entry;
 
@@ -79,9 +79,9 @@ class Symbol_Table implements Symbol_Table_Interface {
 	 */
 	public function lookup(string $name):Symbol_Table_Entry|NULL {
 
-		if(array_search($name, $this->entries)) {
+		if(array_key_exists($name, $this->entries)) {
 
-			return $entry;
+			return $this->entries[$name];
 
 		} else {
 

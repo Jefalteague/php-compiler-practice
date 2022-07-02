@@ -62,13 +62,19 @@ enum ASTNodeTypeEnum implements ASTNodeTypeEnumInterface {
 	case SUBSCRIPTS_OPERAND;
 	case FIELD_OPERAND;
 	case BOOLEAN_CONSTANT_OPERAND;
-	case INTEGER_CONSTANT_OPERAMD;
+	case INTEGER_CONSTANT_OPERAND;
 	case REAL_CONSTANT_OPERAND;
 	case STRING_CONSTANT_OPERAND;
+
+	// OTHER
+	
+
 
 	/*Methods
 	**
 	**
 	*/
+
+	
 
 }

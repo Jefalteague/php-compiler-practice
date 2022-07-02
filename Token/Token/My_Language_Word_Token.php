@@ -2,6 +2,8 @@
 
 namespace Token\Token;
 
+use Token\Pascal_Token_Type as Pascal_Token_Type;
+
 class My_Language_Word_Token extends My_Language_Token {
 
 	/*Properties
@@ -38,16 +40,24 @@ class My_Language_Word_Token extends My_Language_Token {
 
 		}
 
-		if((isset($this->source->config['reserved-word-tokens'][strtolower($value)])) || isset($this->source->config['reserved-word-tokens'][strtoupper($value)])) {
+		$enum = Pascal_Token_Type::tryFrom($value);
+
+		if(($enum != NULL) && ($enum->reserved_words())) {
+
+		//if((isset($this->source->config['reserved-word-tokens'][strtolower($value)])) || isset($this->source->config['reserved-word-tokens'][strtoupper($value)])) {
 			
 			$this->source->set_back();
 			
 			$this->text = substr($value, 0, 1);
-					
+
 			$this->value = $value;
-			
-			$this->type = 'RESERVED KEYWORD';
-			
+
+			$this->type = Pascal_Token_Type::tryFrom($value);
+
+			$this->type_value = $value;
+
+			//var_dump($this->type_value);
+
 		} else {
 			
 			$this->source->set_back();
@@ -57,6 +67,8 @@ class My_Language_Word_Token extends My_Language_Token {
 			$this->value = $value;
 			
 			$this->type = 'IDENTIFIER';
+
+			$this->type_value = 'IDENTIFIER';
 			
 		}
 		

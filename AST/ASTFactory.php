@@ -2,7 +2,7 @@
 
 namespace AST;
 
-use AST\AST;
+use AST\AST as AST;
 use AST\ASTNode;
 use AST\ASTNodeTypeEnum;
 
@@ -25,7 +25,7 @@ class ASTFactory {
 	 */
 	public static function create_AST():AST {
 
-		return new AST;
+		return new AST();
 
 	}
 	

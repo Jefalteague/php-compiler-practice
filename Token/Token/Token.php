@@ -11,6 +11,7 @@ class Token {
 
 	public $text; // the char associated with the token
 	public $type; // the token's type
+	public $type_value; // the token_type's value
 	public $value; // the token's value
 	public $source; // the source object
 	public $line_number; // the token's line number
@@ -82,7 +83,9 @@ class Token {
 	
 	public function get_type() {
 		
-		return $this->type;	
+		$type = $this->type_value;
+
+		return $type;
 		
 	}
 	

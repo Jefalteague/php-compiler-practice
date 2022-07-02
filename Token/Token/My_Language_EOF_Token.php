@@ -19,6 +19,7 @@ class My_Language_EOF_Token extends My_Language_Token {
 		$this->text = 'EOF';
 		$this->type = 'EOF';
 		$this->value = 'EOF';
+		$this->type_value = 'EOF';
 
 	}
 

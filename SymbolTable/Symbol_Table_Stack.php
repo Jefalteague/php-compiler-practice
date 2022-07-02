@@ -12,7 +12,7 @@ class Symbol_Table_Stack implements Symbol_Table_Stack_Interface {
 	/**
 	 * stack
 	 *
-	 * @var array for now?
+	 * @var array
 	 */
 	private array $stack = array();
 	

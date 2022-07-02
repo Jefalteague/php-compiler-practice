@@ -12,7 +12,7 @@ class ASTNode implements ASTNodeInterface {
 	*/
 
 	private ASTNodeTypeEnum $type;
-	private Array $nodes;
+	private Array $children;
 	private ASTNode|NULL $parent;
 	private Array $attributes;
 
@@ -25,7 +25,7 @@ class ASTNode implements ASTNodeInterface {
 	 * Method __construct
 	 *
 	 * @param ASTNodeTypeEnum $type [explicite description]
-	 * @param Array $nodes [explicite description]
+	 * @param Array $children [explicite description]
 	 * @param ASTNode $parent [explicite description]
 	 *
 	 * @return void
@@ -33,9 +33,8 @@ class ASTNode implements ASTNodeInterface {
 	public function __construct(ASTNodeTypeEnum $type) {
 
 		$this->type = $type;
-		$this->nodes = array();
+		$this->children = array();
 		$this->parent = NULL;
-		$this->attributes = array();
 
 	}
 	
@@ -83,9 +82,13 @@ class ASTNode implements ASTNodeInterface {
 	 */
 	public function add_child_node(ASTNode $child_node):ASTNode {
 
-		$child_node_copy = $child_node->set_parent($this);
+		if(!(empty($child_node))) {
 
-		array_push($child_node, $this->nodes);
+			$this->children[] = $child_node;
+
+			$child_node_copy = $child_node->set_parent($this);
+
+		}
 
 		return $child_node;
 
@@ -98,7 +101,7 @@ class ASTNode implements ASTNodeInterface {
 	 */
 	public function get_child_nodes():Array {
 
-		return $this->nodes;
+		return $this->children;
 
 	}
 	

@@ -2,6 +2,7 @@
 
 namespace SymbolTable;
 
+use SymbolTable\Symbol_Table as Symbol_table;
 use SymbolTable\Symbol_Table_Entry_Interface;
 
 class Symbol_Table_Entry implements Symbol_Table_Entry_Interface {
@@ -90,6 +91,7 @@ class Symbol_Table_Entry implements Symbol_Table_Entry_Interface {
 	 *
 	 * @return void
 	 */
+
 	public function set_attribute(Symbol_Table_Key $key, $value):void {
 
 		$attribute = $this->attributes[$key] = $value;
@@ -103,6 +105,7 @@ class Symbol_Table_Entry implements Symbol_Table_Entry_Interface {
 	 *
 	 * @return void
 	 */
+
 	public function get_attribute(Symbol_Table_Key $key) {
 
 		$attribute = $this->attributes[$key];
@@ -118,6 +121,7 @@ class Symbol_Table_Entry implements Symbol_Table_Entry_Interface {
 	 *
 	 * @return void
 	 */
+	
 	public function append_line_number(int $line_number):void {
 
 		$this->line_numbers[] = $line_number;

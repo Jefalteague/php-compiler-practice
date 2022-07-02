@@ -18,6 +18,7 @@ class My_Language_EOL_Token extends My_Language_Token {
 		
 		$this->text = 'EOL';
 		$this->type = 'EOL';
+		$this->type_value = 'EOL';
 		$this->value = 'EOL';
 		
 	}

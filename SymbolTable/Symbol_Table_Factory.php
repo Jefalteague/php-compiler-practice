@@ -2,8 +2,9 @@
 
 namespace SymbolTable;
 
-use SymbolTable\Symbol_Table;
-use SymbolTable\Symbol_Table_Stack;
+use SymbolTable\Symbol_Table_Entry as Symbol_Table_Entry;
+use SymbolTable\Symbol_Table as Symbol_Table;
+use SymbolTable\Symbol_Table_Stack as Symbol_Table_Stack;
 
 class Symbol_Table_Factory {
 

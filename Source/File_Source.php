@@ -198,6 +198,8 @@ class File_Source extends Source {
 		} else if(($this->current_pos == -1) || ($this->current_pos == strlen($this->line))) {
 
 			$this->current_pos = $this->current_pos + 1;
+
+			//var_dump(Pascal_Token_Type::EOL->not_reserved());
 			
 			return Pascal_Token_Type::EOL->not_reserved();
 
